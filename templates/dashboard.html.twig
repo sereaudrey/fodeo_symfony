@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="punchout-content">
+        <div class="home-title-button">
+            <h1>
+                <i class="fas fa-users"></i>
+                Punchouts
+            </h1>
+            {% for message in app.flashes('success') %}
+                <div class="message-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="message-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            
+        </div>
+        <div class="punchout-table">
+
+            <table id="punchout-list" class="clickable-table-list">
+                
+                <thead>
+                    <tr>
+                        <th> Nom </th>
+                        <th> Code Client </th>
+                        <th> Code Enseigne </th>
+                        <th> Type </th>
+                        <th> Société </th>
+                        <th> Action </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+ 
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

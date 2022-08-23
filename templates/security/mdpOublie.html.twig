@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class=" container-mdp-oublie">
+        <div class="zone-title-login">
+
+            <div class="zone-title title">
+                <div class="fodeo">Fodéo</div>
+            </div>
+
+            <div class="zone-logo">
+                <img src="{{ asset('img/logo.png') }}">
+            </div>
+
+        </div>
+
+        <div class="form-login">
+
+            <h1 class="login-title">Mot de passe oublié</h1>
+
+            <form action="{{ path('mdp-oublie-post') }}" method="post" id="formEnvoiMail">
+
+                <div class="field-box box-email">
+                    <label for="username">Email :</label>
+                    <input type="email" id="emailMdpOublie" name="emailMdpOublie" value="" required />
+                </div>
+                {# <div class="message-envoi-mdp-oublie" id="boxMessageEnvoiMail">
+                    <label for="message">Si votre mail est correcte, vous recevrez dans quelques minutes un email contenant un lien de réinitialisation de votre mot de passe.</label>
+                </div> #}
+                {% for message in app.flashes('danger') %}
+                    <div class="message-error" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="message-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <a href="{{ path('login') }}" class="lien-login">Se connecter </a>
+
+                <button type="submit" class="envoyerMail">Envoyer</button>
+
+                {% if error %}
+                    <div class="message-error"> Email incorrect. </div>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

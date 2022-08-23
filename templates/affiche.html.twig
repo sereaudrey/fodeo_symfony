@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <input type="hidden" id="modifPunchoutOCI" value=""/>
+    <div class="message-confirm-supp" id="MessageSupp">
+        <p>Êtes-vous sûr de vouloir supprimer ce punchout ? </p>
+        <button id="AnnulSuppression" class="btn-annule-suppression">Annuler</button>
+        <a class="lien-url-supp" href="">
+            <button id="ConfirmerSuppression" class="btn-confirm-suppression">
+                Supprimer
+            </button>
+        </a>
+    </div>
+    <div class="main-content-punchout">
+        <div class="home-title-button">
+            <h1>{{ donneesFilm.titre }}</h1>
+            {% for message in app.flashes('success') %}
+                <div class="message-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="message-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {# {% if app.user.role == constant('App\\Main\\Variables::ADMIN') %} #}
+                <button class="btn-del" urlSupp="">
+                    <i class="fas fa-times"></i>
+                    Supprimer
+                </button>
+            {# {% endif %} #}
+        </div>
+        <div class="infos-content">
+            <img src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
+            <div class="donneesFilm">
+                <h2 class="titre_affiche">{{donneesFilm.titre}}</h2> <br>
+                <div class=" realisateur_affiche">Réalisateur(s) : {{ donneesFilm.realisateurs}}</div> <br>
+                <div class="acteur_affiche">Acteur(s) : {{ donneesFilm.acteurs }}</div> <br>
+                <div class="synopsis_affiche">Synopsis : {{ donneesFilm.synopsis}}</div> <br>
+                <div class="donnees_affiche">Genre : {{ donneesFilm.genre}}</div> <br>
+                <div class="donnees_affiche">Date de sortie : {{ donneesFilm.dateSortie|date('d/m/Y')}}</div> <br>
+                <div class="donnees_affiche">Note : {{ donneesFilm.note}}</div> <br>
+                <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div> <br>
+
+            </div>
+        </div>
+               
+    </div>
+{% endblock %}

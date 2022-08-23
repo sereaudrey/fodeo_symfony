@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+html, body {
+    font-family: 'Roboto';
+    margin: 0;
+}
+
+h1 {
+    color: #454545;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    background-color: #4a85cd;
+    color: #fafafa;
+    cursor: pointer;
+    /* margin-left: 5px; */
+}
+
+button:hover {
+    box-shadow: 0 0 2px 0 #6b6b6b;
+}
+
+h1 i {
+    color: #bdbdbd;
+}
+
+.home-title-button {
+    border-bottom: 1px solid #bdbdbd;
+    width: 100%;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+/* Gestion des notifications */
+.home-title-add .message-success {
+    width: 20%;
+    text-align: center;
+    margin: 15px;
+    margin-left: 25%;
+    padding: 15px;
+    border-radius: 5px;
+    background: #d9fbed;
+    border: 1px solid #3ed180;
+    box-shadow: 0 0 2px 0 #6b6b6b;
+}
+
+.home-title-add .message-danger {
+    color: #f64d4d;
+    text-align: center;
+    margin: 15px;
+    margin-left: 25%;
+    padding: 15px;
+    border-radius: 5px;
+    background: #ffcbcb;
+    border: 1px solid #f64d4d;
+    box-shadow: 0 0 2px 0 #6b6b6b;
+}
+.message-success {
+    width: 20%;
+    text-align: center;
+    margin: 5px;
+    padding: 15px;
+    border-radius: 5px;
+    background: #d9fbed;
+    border: 1px solid #3ed180;
+    box-shadow: 0 0 2px 0 #6b6b6b;
+}
+
+#formEnvoiMail .message-success, #formLogin .message-success {
+    width: 100%;
+}
+
+.message-danger {
+    color: #f64d4d;
+    text-align: center;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    background: #ffcbcb;
+    border: 1px solid #f64d4d;
+    box-shadow: 0 0 2px 0 #6b6b6b;
+}
+.message-confirm-supp {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    text-align: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    width: 20%;
+    height: 200px;
+    background: #eacbf0;
+    top: 250px;
+    margin-left: 35%;
+}
+.message-confirm-supp p {
+    font-size: 1.2em;
+    padding: 30px;
+}
+
+.btn-confirm-suppression {
+    margin-left: 20px;
+    background : #f64d4d;
+    color: #fafafa;
+}
+
+/* Loader pour test connexion  */
+#loader {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    width: 120px;
+    height: 120px;
+    margin: -76px 0 0 -76px;
+    border: 16px solid #e7a2d2;
+    border-radius: 50%;
+    border-top: 16px solid #eacbf0;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  .loading-mask {
+    display: none;
+    bottom: 0;    
+    left: 0;
+    margin: auto; 
+    position: fixed;   
+    right: 0;     
+    top: 0;   
+    z-index: 1;    
+    background: rgba(0,0,0,.7);
+}

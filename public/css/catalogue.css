@@ -1,0 +1,69 @@
+/*barre de recherche*/
+.search-inline-form {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px; 
+    margin-top: 15px;
+}
+
+.search-inline-form input {
+    width: 100%;
+    height: 100%; 
+}
+
+.search-inline-form button {
+    position: absolute;
+    width: 80px;
+    top: 0;
+    right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; 
+}
+
+.movie-content {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.movie-content img {
+    height: 350px;
+}
+
+.film {
+    width: 250px;
+    margin: 0 5px 15px;
+}
+
+/*Affiche du film*/
+.infos-content {
+    margin-top: 2%;
+    text-align: justify;
+}
+
+.infos-content img {
+    width: 415px;
+    float: left;
+    min-height: 585px;
+}
+
+.donneesFilm {
+    border-left: 1px solid black;
+    padding-left: 20px;
+    margin-left: 32%;
+    min-height: 585px;
+}
+
+.titre_affiche {
+    font-size: 2em;
+}
+
+.realisateur_affiche, .acteur_affiche {
+    font-size: 1.5em;
+}
+
+.synopsis_affiche {
+    font-size: 1.2em;
+}

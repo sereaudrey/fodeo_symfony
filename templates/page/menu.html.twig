@@ -1,0 +1,57 @@
+<div id="menu-wrapper" class="global-menu">
+    <div class="item option" id="menu-option-toggle">
+        <div class="view">
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+    </div>
+    <a href="{{ path('home') }}"/>
+        <div class="item liste"> 
+            <div class="view">
+                <i class="fas fa-list-ul"></i>
+                <div class="libelle">Catalogue</div>
+            </div>
+        </div>
+    </a>
+    {% if app.user is not empty %}
+        {% if app.user.role == 'Administrateur' %}
+            <a href=""/>
+                <div class="item add"> 
+                    <div class="view">
+                        <i class="fas fa-plus"></i>
+                        <div class="libelle">Ajouter</div>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div id="menu-secondary" class="top-menu">
+    <div class="current-user-login">
+        <div class="login-box-launcher">
+            {% if app.user is empty %}
+                <a href="{{ path('login') }}">
+                    <i class="fas fa-user-tag"></i>
+                </a>
+            {% else %}
+                <i class="fas fa-user-tag"></i>
+            {% endif %}
+
+        </div>
+        
+        {% if app.user is not empty %}
+        <div class="login-box">
+            <div class="user-icon"> <i class="fas fa-user"></i></div>
+            <div class="head-login"> Connecté en tant que : </div>
+            <div class="nom-prenom"> {{ app.user.nom }}&nbsp;{{ app.user.prenom }} </div>
+            <div class="email"> {{ app.user.email }}</div>
+            <div class="role"> {{ app.user.role }}</div>
+            <div class="logout">
+                <a href="{{ path('logout') }}">
+                    <button class="btn-logout" type="button"><i class="fas fa-sign-out-alt"></i>&nbsp;Se déconnecter</button>
+                </a>
+            </div>
+        </div> 
+        {% endif %}
+    </div>
+</div>

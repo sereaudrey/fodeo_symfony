@@ -1,0 +1,195 @@
+
+/* Menu vertical*/
+
+.global-menu{
+    background: #454545;
+    color: #fafafa;
+    box-shadow: 0 0px 7px 0 #000000;
+    -webkit-box-shadow: 0px 0 7px 0px #000000;
+    -moz-box-shadow: 0px 0 7px 0px #000000;
+    width: 50px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px 0;
+    text-align: center;
+    transition: all 0.1s linear;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+}
+
+.global-menu.full-menu {
+    width: 200px;
+}
+
+.global-menu.full-menu .item .view .libelle {
+    display: inline-block;
+}
+
+.global-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.global-menu .item{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #454545;
+    border-right: none;
+    border-left: none;
+    background: #6b6b6b;
+    cursor: pointer;
+    transition: all 0.1s linear;
+}
+
+.global-menu .item:hover {
+    background: #eacbf0;
+}
+
+.global-menu .item.option {
+    background: #343434;
+}
+.global-menu .item .view {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    white-space: nowrap;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.global-menu .item .view .libelle {
+    display: none;
+    margin-left: 5px;
+}
+
+
+/* menu horizontal */
+
+.top-menu {
+    position: fixed;
+    width: 100%;
+    height: 30px;
+    top: 0;
+    left: 0;
+    padding: 0 50px;
+    background: #454545;
+    color: #fafafa;
+    z-index: 2;
+}
+
+.top-menu .current-user-login {
+    position: relative;
+    float: right;
+    width: 35px;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.top-menu.menu-opened {
+    padding: 0 50px 0 200px;
+}
+
+.top-menu .current-user-login .login-box-launcher {
+    width: 85%;
+    height: 85%;
+    margin-top: 2px;
+    border-radius: 50px;
+    background: #fafafa;
+    color: #454545;
+    font-size: 21px;
+}
+
+.top-menu .current-user-login .login-box {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    min-width: 200px;
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 3px;
+    background: #fafafa;
+    color: #343434;
+    text-align: left;
+    box-shadow: 0 0 5px 0 #343434;
+    transition: all 0.2s linear;
+    transition-delay: 250ms;
+}
+
+.top-menu .current-user-login {
+    position: relative;
+    float: right;
+    width: 35px;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.top-menu .current-user-login .login-box .user-icon {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    color: #e5e5e5;
+    font-size: 55px;
+    z-index: 0; 
+}
+
+.top-menu .current-user-login .login-box .head-login, .email {
+    margin-bottom: 5px;
+    color: #bdbdbd;
+    font-size: 13px; 
+    line-height: 15px;
+}
+
+.top-menu .current-user-login .login-box .nom-prenom {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.top-menu .current-user-login:hover .login-box {
+    visibility: visible;
+    opacity: 1;
+    top: 100%;
+}
+
+.btn-logout {
+    border-top: 1px solid #bdbdbd;
+    text-align: right;
+    float: right;
+    width: auto;
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    background: #e5e5e5;
+    color: #343434
+}
+
+/* Page principale */
+
+.main-content {
+    margin-left: 50px;
+    padding: 30px 50px;
+    transition: all 0.1s linear;
+}
+
+.main-content.menu-opened {
+    margin-left: 200px;
+}
+
+.fa-trash {
+    color: #f64d4d;
+}

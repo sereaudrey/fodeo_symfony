@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html class="{{ (pageName == 'login') ? 'login' }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        {% include 'page/css.html.twig' %}
+    </head>
+    <body>
+        {% if (pageName != "login") %}
+            {% include 'page/menu.html.twig' %}
+        {% endif %}
+        <div id="wrapper" class="main-content">
+            {% block body %}
+                {# {% if (pageName != "login") %} #}
+                    
+                {# {% endif %} #}
+
+            {% endblock %}
+        </div>
+        {% include 'page/js.html.twig'%}
+    </body>
+</html>

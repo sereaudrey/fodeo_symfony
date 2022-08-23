@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class=" body container">
+        <div class="zone-title-login">
+
+            <div class="zone-title title">
+                <div class="fodeo">Fodéo</div>
+            </div>
+
+            <div class="zone-logo">
+                <img src="{{ asset('img/logo.png') }}">
+            </div>
+
+        </div>
+
+        <div class="form-login">
+
+            <h1 class="login-title">Se connecter</h1>
+
+            <form action="{{ path('login') }}" method="post" id="formLogin">
+                
+                <div class="field-box">
+                    <label for="username">Email :</label>
+                    <input type="email" id="username" name="_username" value="" required />
+                </div>
+
+                <div class="field-box">
+                    <label for="password">Mot de passe :</label> 
+                    <input type="password" id="password" name="_password" value="" required />
+                </div>
+
+                <a href="{{ path('mdp-oublie') }}" class="lien-reset-mdp">Mot de passe oublié </a>
+
+                {% for message in app.flashes('danger') %}
+                    <div class="message-error" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="message-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <button type"submit">Se connecter</button>
+
+                {% if error %}
+                    <div class="message-error"> Identifiant ou mot de passe incorrect. </div>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

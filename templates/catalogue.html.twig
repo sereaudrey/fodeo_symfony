@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="punchout-content">
+        <div class="home-title-button">
+            <h1>
+                <img src="img/logo.png" alt="logo du site">
+                Recherchez votre film ou votre série !
+            </h1>
+            {% for message in app.flashes('success') %}
+                <div class="message-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="message-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            
+        </div>
+        <form action="{{ url('home') }}" class="search-inline-form" id="search-movie-main-form">
+            <input name="q" type="text" class="q-search" placeholder="Rechercher un film ou une série" value="{{query}}">
+            <button class="btn-search"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="movie-content">
+            {% set i= 0 %}
+            {% for film in filmListe %}
+                {% set i = i + 1 %}
+                <a href="{{ path('affiche') ~ "?id=" ~ film.id|number_format }}">
+                    <div class=" film film_{{ i }}">
+                        <img src="{{ film.affiche }}" alt=" Affiche du film " {{film.titre}}> <br>
+                        <span>{{ film.titre }}</span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
