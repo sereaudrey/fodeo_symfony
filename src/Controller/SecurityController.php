@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Exception;
+use App\Entity\Users;
 use App\Repository\UsersRepository;
 use Symfony\Component\Mailer\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class SecurityController extends AbstractController
@@ -90,8 +91,8 @@ class SecurityController extends AbstractController
             $url = $this->generateUrl('reset-password', ['token'=> $token], UrlGeneratorInterface::ABSOLUTE_URL);
             //on prépare le mail
             $mail = (new TemplatedEmail())
-                ->from('sere.audrey@gmail.com')
-                ->to($user->getEmail())
+                ->from('do_not_reply@fodeo.com')
+                ->to('test@mailhog.local')
                 ->subject('Fodéo - Réinitialisation de votre mot de passe')
                 ->htmlTemplate('security/mailResetPassword.html.twig')
                 ->context([
@@ -121,7 +122,7 @@ class SecurityController extends AbstractController
     {
         return $this->render('security/resetPassword.html.twig', array(
             'pageName'     =>'login',
-            'title'        => 'Réinitialiser Mot de Passe - Interface Punchout',
+            'title'        => 'Réinitialiser Mot de Passe - Fodéo',
             'token'        => $token
         ));
     }
@@ -129,60 +130,130 @@ class SecurityController extends AbstractController
     /**
     * @Route("/reset-password-post", name="reset-password-post")
     */
-    public function resetPasswordPost(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager, 
+    public function resetPasswordPost(Request $request, UserPasswordHasherInterface $hash, EntityManagerInterface $manager, 
     UsersRepository $usersRepository) {
-        // //On cherche l'utilisateur avec le token
-        // $token = $request->request->get('token');
-        // $user = $cockpitUsersRepository->findOneBy(array('reset_token' => $token));
-        // if(!$user) {
-        //     $this->addFlash('danger', 'Utilisateur inconnu');
-        //     return $this->redirectToRoute('mdp-oublie');
-        // }
+        //On cherche l'utilisateur avec le token
+        $token = $request->request->get('token');
+        $user = $usersRepository->findOneBy(array('reset_token' => $token));
+        if(!$user) {
+            $this->addFlash('danger', 'Utilisateur inconnu');
+            return $this->redirectToRoute('mdp-oublie');
+        }
 
-        // //On vérifie que les deux mdp soient identiques 
-        // $newMdp = $request->request->get('newMdp');
-        // $confirmNewMdp = $request->request->get('confirmNewMdp');
+        //On vérifie que les deux mdp soient identiques 
+        $newMdp = $request->request->get('newMdp');
+        $confirmNewMdp = $request->request->get('confirmNewMdp');
 
-        // if(!empty($newMdp) && !empty($confirmNewMdp)) {
+        if(!empty($newMdp) && !empty($confirmNewMdp)) {
             
-        //     if($newMdp !== $confirmNewMdp) {
-        //         //On affiche un message les mdp ne sont pas identiques
-        //         $this->addFlash('danger', 'Les mots de passe ne correspondent pas. Veuillez écrire le même mot de passe');
-        //         return $this->redirectToRoute('reset-password', ['token' => $token]);
-        //     } else {
-        //         //On chiffre le mot de passe 
-        //         $mdp = $encoder->encodePassword($user, $newMdp);
-        //         //On met à jour la bdd avec le nouveau mdp + supprime le token
-        //         try {
-        //             $manager->beginTransaction();
-        //             $updateMdp = $cockpitUsersRepository->createQueryBuilder('p')
-        //             ->update()
-        //             ->set('p.password', ':password')
-        //             ->set('p.reset_token', ':resetToken')
-        //             ->where('p.reset_token = :token')
-        //             ->setParameter('password', $mdp)
-        //             ->setParameter('resetToken', '')
-        //             ->setParameter('token', $token)
-        //             ->getQuery()
-        //             ->getResult();
+            if($newMdp !== $confirmNewMdp) {
+                //On affiche un message les mdp ne sont pas identiques
+                $this->addFlash('danger', 'Les mots de passe ne correspondent pas. Veuillez écrire le même mot de passe');
+                return $this->redirectToRoute('reset-password', ['token' => $token]);
+            } else {
+                //On chiffre le mot de passe 
+                $mdp = $hash->hashPassword($user, $newMdp);
+                //On met à jour la bdd avec le nouveau mdp + supprime le token
+                try {
+                    $manager->beginTransaction();
+                    $updateMdp = $usersRepository->createQueryBuilder('p')
+                    ->update()
+                    ->set('p.password', ':password')
+                    ->set('p.reset_token', ':resetToken')
+                    ->where('p.reset_token = :token')
+                    ->setParameter('password', $mdp)
+                    ->setParameter('resetToken', '')
+                    ->setParameter('token', $token)
+                    ->getQuery()
+                    ->getResult();
         
-        //             //On affiche un message mdp modifié
-        //             $this->addFlash('success', 'Votre mot de passe a bien été modifié');
-        //             $manager->flush();
-        //             $manager->commit();
+                    //On affiche un message mdp modifié
+                    $this->addFlash('success', 'Votre mot de passe a bien été modifié');
+                    $manager->flush();
+                    $manager->commit();
         
-        //             return $this->redirectToRoute('login');
-        //         } catch (Exception $e) {
-        //             $manager->rollback();
-        //             throw new Exception($e->getMessage());
-        //             return $this->redirectToRoute('reset-password', ['token' => $token]);
-        //         }
+                    return $this->redirectToRoute('login');
+                } catch (Exception $e) {
+                    $manager->rollback();
+                    throw new Exception($e->getMessage());
+                    return $this->redirectToRoute('reset-password', ['token' => $token]);
+                }
                 
-        //     }
-        // } else {
-        //     //Afficher message "Veuillez renseigner les champs"
-        //     $this->addFlash('danger', 'Veuillez renseigner tous les champs');
-        //     return $this->redirectToRoute('reset-password', ['token' => $token]);
-        // }
+            }
+        } else {
+            //Afficher message "Veuillez renseigner les champs"
+            $this->addFlash('danger', 'Veuillez renseigner tous les champs');
+            return $this->redirectToRoute('reset-password', ['token' => $token]);
+        }
+    }
+
+    /**
+    * @Route("/inscription", name="inscription")
+    */
+    public function inscription() 
+    {
+        return $this->render('security/inscription.html.twig', array(
+            'pageName'     =>'login',
+            'title'        => 'Inscription - Fodéo',
+        ));
+    }
+
+    /**
+    * @Route("/createUser", name="createUser")
+    */
+    public function createUser(Request $request, UserPasswordHasherInterface $hash, EntityManagerInterface $manager, 
+    UsersRepository $usersRepository) 
+    {
+       $email = $request->get('email_newUser');
+       $username = $request->get('username');
+       $prenom = $request->get('prenom_newUser');
+       $nom = $request->get('nom_newUser');
+       $mdp = $request->get('mdp_newUser');
+       $role = 'Utilisateur';
+       $dateCreation = new \DateTime('now');
+
+       $manager->beginTransaction();
+
+       try {
+        if(
+            empty($email) ||
+            empty($mdp) ||
+            empty($username) ||
+            empty($nom) ||
+            empty($prenom)
+        ) {
+            $this->addFlash('danger', 'Tous les champs obligatoires ne sont pas renseignés');
+            throw new Exception('Tous les champs obligatoires ne sont pas renseignés');
+        } else {
+            //On vérifie si un utilisateur a déjà ce mail
+            $userBdd = $usersRepository->findOneBy(array('email' => $email));
+            if($userBdd) {
+                $this->addFlash('danger', 'Cet utilisateur existe déjà');
+                throw new Exception('Cet utilisateur existe déjà');
+            }  
+            $newUser = new Users($email, $mdp);
+            $hash = $hash->hashPassword($newUser, $mdp);
+            $newUser->setEmail($email)
+                    ->setPassword($hash)
+                    ->setDateCreation($dateCreation)
+                    ->setNom($nom)
+                    ->setPrenom($prenom)
+                    ->setUsername($username)
+                    ->setRole($role);
+            $manager->persist($newUser);
+            $manager->flush();
+            $manager->commit();
+        }
+
+        $this->addFlash('success', 'Votre compte a bien été créé');
+        $return['message'] = 'Votre compte a bien été créé';
+            
+       }catch(Exception $e) {
+        $manager->rollBack();
+        $return['success'] = false;
+        $return['message'] = $e->getMessage();
+       }
+
+        return $this->redirectToRoute('login');
     }
 }

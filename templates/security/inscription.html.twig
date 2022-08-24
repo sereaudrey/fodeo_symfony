@@ -17,18 +17,33 @@
 
         <div class="form-login">
 
-            <h1 class="login-title">Se connecter</h1>
+            <h1 class="login-title">Inscription</h1>
 
-            <form action="{{ path('login') }}" method="post" id="formLogin">
+            <form action="{{ path('createUser') }}" method="post" id="formLogin">
                 
                 <div class="field-box">
-                    <label for="username">Email :</label>
-                    <input type="email" id="username" name="_username" value="" required />
+                    <label for="email">Email :</label>
+                    <input type="email" name="email_newUser" value="" required />
+                </div>
+
+                <div class="field-box">
+                    <label for="username">Pseudo :</label>
+                    <input type="text" name="username" value "" required>
+                </div>
+
+                <div class="field-box">
+                    <label for="nomAdd">Nom :</label>
+                    <input type="text" name="nom_newUser" value "" required>
+                </div>
+
+                <div class="field-box">
+                    <label for="prenomAdd">Prénom :</label>
+                    <input type="text" name="prenom_newUser" value "" required>
                 </div>
 
                 <div class="field-box">
                     <label for="password">Mot de passe :</label> 
-                    <input type="password" id="password" name="_password" value="" required />
+                    <input type="password" id="password" name="mdp_newUser" value="" required />
                 </div>
 
                 <a href="{{ path('mdp-oublie') }}" class="lien-reset-mdp">Mot de passe oublié </a>
@@ -44,13 +59,7 @@
                     </div>
                 {% endfor %}
 
-                <button type"submit">Se connecter</button><br>
-                <br><span>Pas encore de compte ? <a href="{{ path('inscription') }}" class="lien-inscription">Inscrivez-vous !</a></span>
-
-                {% if error %}
-                    <div class="message-error"> Identifiant ou mot de passe incorrect. </div>
-                {% endif %}
-
+                <button type"submit">S'inscrire</button><br>
             </form>
         </div>
     </div>

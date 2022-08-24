@@ -71,7 +71,7 @@ img {
     font-family: inherit;
 }
 
-a.lien-reset-mdp, a.lien-login {
+a.lien-reset-mdp, a.lien-login, a.lien-inscription {
     color: #4a85cd;
     text-decoration: none;
 }
