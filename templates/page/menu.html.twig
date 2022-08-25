@@ -14,11 +14,11 @@
     </a>
     {% if app.user is not empty %}
         {% if app.user.role == 'Administrateur' %}
-            <a href=""/>
-                <div class="item add"> 
+            <a href="{{ path('admin') }}"/>
+                <div class="item admin"> 
                     <div class="view">
-                        <i class="fas fa-plus"></i>
-                        <div class="libelle">Ajouter</div>
+                        <i class="fas fa-user-lock"></i>
+                        <div class="libelle">Espace administrateur</div>
                     </div>
                 </div>
             </a>

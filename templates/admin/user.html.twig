@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<input type="hidden" id="modifUser" value="{{ path('userEdit') }}"/>
+<div class="message-confirm-supp" id="MessageSupp">
+    <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ? </p>
+    <button id="AnnulSuppression" class="btn-annule-suppression">Annuler</button>
+    <a class="lien-url-supp" href="">
+        <button id="ConfirmerSuppression" class="btn-confirm-suppression">
+            Supprimer
+        </button>
+    </a>
+</div>
+    <div id="users-container">
+        <h1>
+            <a href="{{ path('admin_users') }}">
+                <button class="history">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </a>
+            <i class="fas fa-user-astronaut"></i>
+            {{ donneesUser.prenom }} {{ donneesUser.nom }} - Fiche utilisateur
+            <div class="right-action">
+                <button id="delete-user-button" urlSupp="{{ path('userDelete') ~ '?id=' ~ donneesUser.id|number_format }}" class="error">
+                    <i class="fas fa-user-times"></i>&nbsp;Supprimer
+                </button>
+            </div>
+        </h1>
+
+        <div class="user-info">
+            <div class="info">
+                <span>
+                    <i class="fas fa-calendar"></i>&nbsp;Créé le {{ donneesUser.dateCreation | date('d/m/Y') }}
+                </span>
+                <br>
+                <span>
+                    <i class="fas fa-clock"></i>&nbsp;Modifié le {{ donneesUser.dateDerniereModif | date('d/m/Y') }}
+                </span>
+            </div>
+            
+            {% for message in app.flashes('success') %}
+                <div class="message-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="message-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="data-block">
+            <div class="data-title">
+                <span class="data-text">
+                    <span class="text">Informations sur l'utilisateur</span>
+                    <button class="data-edit edit-user">Modifier</button>
+                    <button class="data-cancel data-cancel-user">Annuler</button>
+                    <button class="data-save data-save-user" data-url="{{ path('userEdit') }}">Enregistrer</button>
+                </span>
+            </div>
+            <div class="data-content">
+                <form class="edit-target" id="formEditUser" autocomplete="off">
+                <input type="hidden" name="id_user" value="{{ donneesUser.id }}">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>ID</td>
+                                <td>{{ donneesUser.id }}</td>
+                            </tr>
+                            <tr class="edit-area">
+                                <td>Email</td>
+                                <td class="edit-label edit-label-user">
+                                    <span class="label-text lbl-email">{{ donneesUser.email }}</span>
+                                </td>
+                                <td class="edit-input edit-input-user">
+                                    <input type="email" class="update-field" name="email" value="{{ donneesUser.email }}">
+                                </td>
+                            </tr>
+                            <tr class="edit-area">
+                                <td>Nom</td>
+                                <td class="edit-label edit-label-user">
+                                    <span class="label-text lbl-nom">{{ donneesUser.nom }}</span>
+                                </td>
+                                <td class="edit-input edit-input-user">
+                                    <input type="text" class="update-field" name="nom" value="{{ donneesUser.nom }}">
+                                </td>
+                            </tr>
+                            <tr class="edit-area">
+                                <td>Prénom</td>
+                                <td class="edit-label edit-label-user">
+                                    <span class="label-text lbl-prenom">{{ donneesUser.prenom }}</span>
+                                </td>
+                                <td class="edit-input edit-input-user">
+                                    <input type="text" class="update-field" name="prenom" value="{{ donneesUser.prenom }}">
+                                </td>
+                            </tr>
+                            <tr class="edit-area">
+                                <td>Pseudo</td>
+                                <td class="edit-label edit-label-user">
+                                    <span class="label-text lbl-pseudo">{{ donneesUser.pseudo }}</span>
+                                </td>
+                                <td class="edit-input edit-input-user">
+                                    <input type="text" class="update-field" name="pseudo" value="{{ donneesUser.pseudo }}">
+                                </td>
+                            </tr>
+                            <tr class="edit-area">
+                                <td>Mot de passe</td>
+                                <td class="edit-label edit-label-user">
+                                    <span class="label-text lbl-password">
+                                        {% for i in 0..10 %}&bull;{% endfor %}
+                                    </span>
+                                </td>
+                                <td class="edit-input edit-input-user">
+                                    <input type="password" class="update-field" name="password" value="" autocomplete="new-password">
+                                </td>
+                            </tr>
+                            <tr class="edit-area">
+                                <td>Rôle</td>
+                                <td class="edit-label edit-label-user">
+                                    <span class="label-text lbl-role">{{ donneesUser.role }}</span>
+                                </td>
+                                <td class="edit-input edit-input-user">
+                                    <select name="role" class="update-field">
+                                        <option value="Administrateur">Administrateur</option>
+                                        <option value="Utilisateur">Utilisateur</option>
+                                    </select>    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

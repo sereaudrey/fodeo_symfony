@@ -238,7 +238,7 @@ class SecurityController extends AbstractController
                     ->setDateCreation($dateCreation)
                     ->setNom($nom)
                     ->setPrenom($prenom)
-                    ->setUsername($username)
+                    ->setPseudo($username)
                     ->setRole($role);
             $manager->persist($newUser);
             $manager->flush();

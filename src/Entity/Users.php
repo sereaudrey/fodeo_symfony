@@ -105,12 +105,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getPseudo(): ?string
     {
         return $this->pseudo;
     }
 
-    public function setUsername(string $pseudo): self
+    public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
 
@@ -181,6 +181,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return array('Administrateur', 'Utilisateur');
     }
     public function eraseCredentials(){}
+    public function getUsername(){}
     public function getSalt(): ?string {
         return null;
     }

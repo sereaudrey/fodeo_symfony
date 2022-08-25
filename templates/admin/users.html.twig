@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="users-content">
+        <div class="home-title-button">
+            <h1>
+                <img src="img/logo.png" alt="logo du site">
+                Liste des utilisateurs inscrits
+            </h1>
+            {% for message in app.flashes('success') %}
+                <div class="message-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="message-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            
+        </div>
+        <form action="{{ url('admin_users') }}" class="search-inline-form" id="search-user-main-form">
+            <input name="q" type="text" class="q-search" placeholder="Rechercher un utilisateur par : nom, prénom, pseudo ou email." value="{{query}}">
+            <button class="btn-search"><i class="fas fa-search"></i></button>
+        </form>
+
+        <div class="users-table">
+
+            <table id="user-list" class="clickable-table-list">
+                
+                <thead>
+                    <tr>
+                        <th> Nom </th>
+                        <th> Prénom </th>
+                        <th> Pseudo </th>
+                        <th> Email </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in userListe %}
+                        <tr class="link" data-href="{{ path('user') ~ "?id=" ~ user.id|number_format }}"> 
+                            <td class="center"> {{user.nom}} </td>
+                            <td class="center"> {{user.prenom}} </td>
+                            <td class="center"> {{user.pseudo}} </td>
+                            <td class="center"> {{user.email}} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination">
+                {{ knp_pagination_render(userListe, 'page/pagination.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

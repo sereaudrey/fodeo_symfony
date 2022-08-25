@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="dashboard-content">
+        <div class="home-title-button">
+            <h1>
+                <img src="img/logo.png" alt="logo du site">
+                Espace administrateur
+            </h1>
+            {% for message in app.flashes('success') %}
+                <div class="message-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+                <div class="message-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            
+        </div>
+        <div class="content">
+            <div class="tuile">
+                <a href="{{ path('admin_users') }}"><span>Consulter la liste des utilisateurs</span></a><br>
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="tuile">
+                <a href="{{ path('admin_movie') }}"><span>Ajouter du contenu dans le catalogue</span></a><br>
+                <i class="fas fa-film"></i>
+            </div>
+        </div>
+    </div>
+{% endblock %}

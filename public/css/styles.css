@@ -119,31 +119,19 @@ h1 i {
     color: #fafafa;
 }
 
-/* Loader pour test connexion  */
-#loader {
-    display: none;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 2;
-    width: 120px;
-    height: 120px;
-    margin: -76px 0 0 -76px;
-    border: 16px solid #e7a2d2;
-    border-radius: 50%;
-    border-top: 16px solid #eacbf0;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-  }
+/*Icones*/
+.fa-check-circle {
+    color: #0ccb61;
+    font-size: 20px;
+    margin-left: 3px;
+}
 
-  .loading-mask {
-    display: none;
-    bottom: 0;    
-    left: 0;
-    margin: auto; 
-    position: fixed;   
-    right: 0;     
-    top: 0;   
-    z-index: 1;    
-    background: rgba(0,0,0,.7);
+.fa-times-circle {
+    color: #f64d4d;
+    font-size: 20px;
+}
+
+.fa-plus-circle {
+    color: #4a85cd;
+    font-size: 20px;
 }
