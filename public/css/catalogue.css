@@ -74,3 +74,158 @@
 .btnPdf {
     float: right;
 }
+
+/*RESPONSIVE*/
+@media only screen and (max-width: 1441px) {
+    /*Catalogue*/
+
+    /*Affiche*/
+    .infos-content img {
+        width: 25%;
+        min-height: 475px;
+    }
+
+    .donneesFilm {
+        min-height: 475px;
+    }
+
+    .titre_affiche {
+        font-size: 1.5em;
+    }
+
+    .realisateur_affiche, .acteur_affiche {
+        font-size: 1.2em;
+    }
+
+    .synopsis_affiche {
+        font-size: 1em;
+    }
+}
+
+@media only screen and (max-width: 1025px) {
+    /*Catalogue*/
+    #affiche-content h1 {
+        font-size: 1.8em;
+    }
+
+    .movie-content {
+        width: 100%;
+    }
+    
+    .main-content {
+        padding: 30px 30px;
+    }
+    /*Affiche*/
+    .infos-content img {
+        width: 30%;
+        min-height: 460px;
+    }
+
+    .donneesFilm {
+        min-height: 460px;
+        width: 70%;
+    }
+
+    .donneesFilm h2 {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 769px) {
+    /*Catalogue*/
+    #affiche-content h1 {
+        font-size: 1.6em;
+    }
+    /*Affiche*/
+    .infos-content img {
+        width: 100%;
+        min-height: 460px;
+        float: none;
+    }
+
+    .donneesFilm {
+        width: 100%;
+        border: none;
+        margin-left: 0;
+    }
+
+}
+
+@media only screen and (max-width: 426px) {
+    /*Catalogue*/
+    .movie-content {
+        margin-left: 10%;
+    }
+
+    /*Affiche*/
+    .infos-content img {
+        margin-top: 2%;
+    }
+
+    .donneesFilm {
+        padding: 0;
+    }
+
+}
+
+@media only screen and (max-width: 376px) {
+    /*Catalogue*/
+    .main-content {
+        padding: 30px 13px;
+    }
+
+    #affiche-content h1 {
+        font-size: 1.4em;
+    }
+
+    .movie-content {
+        margin-left: 7%;
+    }
+
+    /*Affiche*/
+    h1 {
+        font-size: 1.5em;
+    }
+    .infos-content img {
+        margin-top: 2%;
+        min-height: 415px;
+    }
+
+    .donneesFilm {
+        padding: 0;
+    }
+
+    .titre_affiche {
+        font-size: 1.2em;
+    }
+
+    .realisateur_affiche, .acteur_affiche {
+        font-size: 1em;
+    }
+
+    .synopsis_affiche {
+        font-size: 0.8em;
+    }
+
+}
+
+@media only screen and (max-width: 321px) {
+    /*Catalogue*/
+    .movie-content img {
+        height: 305px;
+        width: 205px
+    }
+
+    .movie-content {
+        margin-left: 0%;
+    }
+
+    /*Affiche*/
+    h1 {
+        font-size: 1.2em;
+    }
+    .infos-content img {
+        margin-top: 2%;
+        min-height: 320px;
+    } 
+}

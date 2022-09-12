@@ -135,11 +135,43 @@ h1 i {
     color: #4a85cd;
     font-size: 20px;
 }
-
+/*Formulaire de contact*/
 .contact {
     width: 100%;
 }
 
 .form-contact {
     width: 50%;
+}
+
+/*RESPONSIVE*/
+@media only screen and (max-width: 769px) {
+    #contact-content h1 {
+        font-size: 1.8em;
+    }
+
+    .form-contact {
+        width: 100%;
+    }
+
+    .form-contact button {
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    #contact-content h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    #contact-content h1 {
+        font-size: 1.2em;
+    }
+
+    #contact-content h2 {
+        font-size: 1em;
+    }
+
 }

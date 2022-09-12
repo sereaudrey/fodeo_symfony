@@ -37,4 +37,49 @@
     border: none;
     padding: 0;
 }
- 
+
+/*RESPONSIVE*/
+@media only screen and (max-width: 769px) {
+    .infos_user .block-left {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .infos_user .block-left, .infos_user .block-right {
+        width: 100%;
+        text-align: center;
+    }
+
+    #dashboard-content h1 {
+        font-size:1.8em
+    }
+
+    .infos_user {
+        display: block;
+    }
+
+    .buttonUser {
+        margin-top: 0;
+    }
+
+    .modifCompteUser {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    #dashboard-content h1 {
+        font-size:1.5em
+    }
+}
+
+@media only screen and (max-width: 321px) {
+    #dashboard-content h1 {
+        font-size:1.4em
+    }
+
+    .block-left h2 {
+        font-size: 1.2em
+    }
+}

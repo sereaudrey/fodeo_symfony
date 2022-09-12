@@ -101,11 +101,8 @@ class CompteController extends AbstractController
      */
     public function updateMdp(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hash ,UsersRepository $usersRepository)
     {
-        $id = $request->get('idUser');
-        $donneesUser = $usersRepository->find($id);
-        $mdpBdd = $donneesUser->getPassword();
-        $email = $donneesUser->getEmail();
         //On récupère les données du formulaire
+        $id = $request->get('idUser');
         $mdp = $request->get('new_mdp');
         $confirm = $request->get('new_mdp_confirm');
         $date = new \DateTime('now');
@@ -140,17 +137,18 @@ class CompteController extends AbstractController
                         ->setParameter('date', $date)
                         ->getQuery()
                         ->getResult();
-                $this->addFlash('success', 'Votre mot de passe a bien été sauvegardés');
+                $this->addFlash('success', 'Votre mot de passe a bien été sauvegardé');
                 $manager->flush();
                 $manager->commit();
 
-                $return['message'] = "Votre mot de passe a bien été sauvegardés";
+                $return['message'] = "Votre mot de passe a bien été sauvegardé";
                 $return['success'] = true;
+                return $this->redirectToRoute('home');
             }
         } catch(Exception $e) {
             $manager->rollback();
             $return['message'] = $e->getMessage();
+            return $this->redirectToRoute('dashboardUser');
         }
-        return new JsonResponse($return);
     }
 }

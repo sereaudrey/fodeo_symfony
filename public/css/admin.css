@@ -356,3 +356,91 @@ a[href*="intent"] {
     float: right;
     margin-right: 10px;
 }
+
+/*RESPONSIVE*/
+@media only screen and (max-width: 1025px) {
+    /*Accueil admin*/
+    .content {
+        width: 80%;
+        margin: 5% 0 5% 10%;
+    }
+
+    /*Ajout contenu*/
+    .content-form-movie {
+        padding: 5% 15%;
+    }
+}
+
+@media only screen and (max-width: 769px) {
+    /*Liste utilisateurs*/
+    .users-table {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    #user-list {
+        overflow: auto;
+        width: -webkit-fill-available;
+    }
+
+    /*Ajout contenu*/
+    .content-form-movie {
+        padding: 5%;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    /*Accueil admin*/
+    .content {
+        display: block;
+    }
+
+    .tuile {
+        margin: 5% 0 5% 10%;
+        width: 80%;
+    }
+
+    /*Ajout contenu*/
+    .add-content {
+        margin: 5% 0%;
+        width: 100%;
+    }
+
+    .content-form-movie {
+        padding: 2%;
+    }
+
+    .add-movie label {
+        width: 70%;
+        text-align: center;
+        margin-left: 15%;
+    }
+
+    .add-movie input, .add-movie textarea, .add-movie select {
+        width: 70%;
+    }
+
+    .radio-input {
+        margin-left: 25%;
+    }
+
+    .btn-add-movie {
+        float: none;
+        margin-left: 35%;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+
+}
+
+@media only screen and (max-width: 321px) {
+    /*Ajout Contenu*/
+    .radio-input {
+        margin-left: 20%;
+    }
+
+    .btn-add-movie {
+        margin-left: 30%;
+    }
+}

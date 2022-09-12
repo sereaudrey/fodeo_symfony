@@ -95,7 +95,7 @@
                     {% endif %}
                 </div>
                 <div class="block-right">
-                    <form id="modifDonneesMdpProfil">
+                    <form id="modifDonneesMdpProfil" action="{{ path('modifDoneesUserMdpProfil') }}" method="POST">
                     <input type="hidden" name="idUser" value="{{ app.user.id }}">
                     <span>Attention ! Si vous changer votre mot de passe, vous serez automatiquement déconnecté</span>
                         <div class="field-box">
@@ -108,7 +108,7 @@
                         </div>
                         <div class="buttonUser">
                             <button class="annulmodifCompteUser">Annuler</button>
-                            <button class="validmodifCompteMdpUser">Enregistrer</button>
+                            <button type="submit" class="validmodifCompteMdpUser">Enregistrer</button>
                         </div>
                     </form>
                 </div>

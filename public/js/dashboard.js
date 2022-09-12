@@ -50,31 +50,4 @@ $(document).ready(function () {
             Response.getMessage();
         }
     });
-
-    //Enregistrer les nouveau mdp
-    $('.validmodifCompteMdpUser').click(function(e) {
-        e.preventDefault();
-        //Compresse les données en une seule ligne
-        let dataMdp = $("#modifDonneesMdpProfil").serialize();
-
-        //Envoi des données
-        try{
-            $.ajax({
-                type: "POST",
-                url : $('#urlModifDonneesMdpProfil').val(),
-                dataType: 'json',
-                data: dataMdp
-            })
-            .always(function() {
-                $(".content-infos-mdp").hide();
-                $(".content-infos").show();
-
-                // //On rafraîchit la page 
-                // window.location.reload(true); 
-            })
-        } catch {
-            Response.setStatus(400);
-            Response.getMessage();
-        }
-    })
 });
