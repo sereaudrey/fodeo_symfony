@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div id="punchout-content">
+<input type="hidden" id="urlModifDonneesProfil" value=" {{ path('modifDoneesUserProfil')}}">
+<input type="hidden" id="urlModifDonneesMdpProfil" value=" {{ path('modifDoneesUserMdpProfil')}}">
+    
+    <div id="dashboard-content">
         <div class="home-title-button">
             <h1>
-                <i class="fas fa-users"></i>
-                Punchouts
+                <i class="fas fa-id-card"></i>
+                Mon tableau de bord
             </h1>
             {% for message in app.flashes('success') %}
                 <div class="message-success" role="alert">
@@ -18,25 +21,98 @@
             {% endfor %}
             
         </div>
-        <div class="punchout-table">
-
-            <table id="punchout-list" class="clickable-table-list">
-                
-                <thead>
-                    <tr>
-                        <th> Nom </th>
-                        <th> Code Client </th>
-                        <th> Code Enseigne </th>
-                        <th> Type </th>
-                        <th> Société </th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-
-                <tbody>
- 
-                </tbody>
-            </table>
+        <div class="content-infos">
+            <div class="infos_user">
+                <div class="block-left">
+                    <h2>Profil de {{ app.user.pseudo }}</h2>
+                    {% if app.user.imgProfil == null %}
+                        <img class="profilImg" src="img/user/iconUser.png" alt="Photo du profil par défault"><br>
+                    {% else %}
+                        <img class="profilImg" src="{{ app.user.imgProfil }}" alt="Photo du profil"><br>
+                    {% endif %}
+                </div>
+                <div class="block-right">
+                    <p>Pseudo : {{ app.user.pseudo }}</p> 
+                    <p>Nom : {{ app.user.nom }}</p> 
+                    <p>Prénom : {{ app.user.prenom }}</p> 
+                    <p>E-mail : {{ app.user.email }}</p>
+                </div>
+            </div>
+            <div class="buttonUser">
+                <button class="modifCompteUser">Modifier mes informations personnelles</button>
+                <button class="modifCompteMdpUser">Modifier mon mot de passe</button>
+            </div>
+        </div>
+        <div class="content-infos-edit">
+             <div class="infos_user">
+                <div class="block-left">
+                    <h2>Profil de {{ app.user.pseudo }}</h2>
+                    {% if app.user.imgProfil == null %}
+                        <img class="profilImg" src="img/user/iconUser.png" alt="Photo du profil par défault"><br>
+                    {% else %}
+                        <img class="profilImg" src="{{ app.user.imgProfil }}" alt="Photo du profil"><br>
+                    {% endif %}
+                </div>
+                <div class="block-right">
+                    <form id="modifDonneesProfil">
+                        <input type="hidden" name="idUser" value="{{ app.user.id }}">
+                        <div class="field-box input-avatar">
+                            <label for="avatar ">Modifier ma photo de profil : </label> <br>
+                            <input type="file" id="avatar" name="avatar" accept="image/*"/>
+                        </div>
+                        <div class="field-box">
+                            <label for="email">Email : </label>
+                            <input type="email" name ="new_email" value ="{{ app.user.email }}" disabled><br>
+                        </div>
+                        <div class="field-box">
+                            <label for="pseudo">Pseudo : </label>
+                            <input type="text" name ="new_pseudo" value ="{{ app.user.pseudo }}"><br>
+                        </div>
+                        <div class="field-box">
+                            <label for="nom">Nom : </label>
+                            <input type="text" name ="new_nom" value ="{{ app.user.nom }}"><br>
+                        </div>
+                        <div class="field-box">
+                            <label for="prenom">Prénom : </label>
+                            <input type="text" name ="new_prenom" value ="{{ app.user.prenom }}">
+                        </div>
+                        <div class="buttonUser">
+                            <button class="annulmodifCompteUser">Annuler</button>
+                            <button class="validmodifCompteUser">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content-infos-mdp">
+            <div class="infos_user">
+                <div class="block-left">
+                    <h2>Profil de {{ app.user.pseudo }}</h2>
+                    {% if app.user.imgProfil == null  %}
+                        <img class="profilImg" src="img/user/iconUser.png" alt="Photo du profil par défault"><br>
+                    {% else %}
+                        <img class="profilImg" src="{{ app.user.imgProfil }}" alt="Photo du profil"><br>
+                    {% endif %}
+                </div>
+                <div class="block-right">
+                    <form id="modifDonneesMdpProfil">
+                    <input type="hidden" name="idUser" value="{{ app.user.id }}">
+                    <span>Attention ! Si vous changer votre mot de passe, vous serez automatiquement déconnecté</span>
+                        <div class="field-box">
+                            <label for="new_mdp">Nouveau mot de passe : </label>
+                            <input type="password" name ="new_mdp"value =""><br>
+                        </div>
+                        <div class="field-box">
+                            <label for="confirm_new_mdp">Confirmer votre nouveau mot de passe : </label>
+                            <input type="password" name ="new_mdp_confirm"value =""><br>
+                        </div>
+                        <div class="buttonUser">
+                            <button class="annulmodifCompteUser">Annuler</button>
+                            <button class="validmodifCompteMdpUser">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -38,6 +38,9 @@
 }
 
 /*Affiche du film*/
+.main-content-affiche {
+    margin-bottom: 20px;
+}
 .infos-content {
     margin-top: 2%;
     text-align: justify;
@@ -66,4 +69,8 @@
 
 .synopsis_affiche {
     font-size: 1.2em;
+}
+
+.btnPdf {
+    float: right;
 }

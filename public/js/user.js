@@ -56,7 +56,7 @@ $(document).ready(function () {
     /*Supprimer un utilisateur*/
     //Si on clique sur supprimer le punchout on affiche le message de confirmation
     $('#delete-user-button').click(function() {
-        //On récupère l'url selon OCI ou CXML avec l'id
+        //On récupère l'url 
         url = $(this).attr('urlSupp');
         if($('.message-confirm-supp').css('display') == 'none') {
           $('#users-container').css('opacity', '0.3');

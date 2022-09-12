@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Exception;
 use App\Entity\Users;
+use App\Entity\Movies;
 use App\Repository\UsersRepository;
+use App\Repository\MoviesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -207,6 +211,74 @@ class AdminController extends AbstractController
             'pageName' => 'AddMovie',
             'title' => 'Ajouter du contenu au catalogue',
         ]);
+    }
+
+    /**
+     * @Route("/add-movieRequest", name="add-movieRequest")
+     */
+    public function AddMovieRequest(Request $request, EntityManagerInterface $manager, MoviesRepository $moviesRepository): Response
+    {
+        $type = $request->get('add_type');
+        $titre = $request->get('add_titre');
+        $affiche =$request->get('add_affiche');
+        $genre = $request->get('add_genre');
+        $dateSortie = $request->get('add_date');
+        $synopsis = $request->get('add_synopsis');
+        $realisateurs = $request->get('add_realisateurs');
+        $acteurs = $request->get('add_acteurs');
+        $note = $request->get('add_note');
+        $plateforme = $request->get('add_plateforme');
+
+        //dd($type, $titre, $affiche, $genre, $dateSortie, $synopsis, $realisateurs, $acteurs, $note, $plateforme);
+
+        $manager->beginTransaction();
+
+        try {
+            //On vérifie si le formulaire est bien rempli
+            if(
+                empty($type) ||
+                empty($titre) ||
+                empty($affiche) ||
+                empty($acteurs) ||
+                empty($synopsis) 
+            ){
+                $this->addFlash('danger', 'Tous les champs obligatoires ne sont pas renseignés');
+                throw new Exception('Tous les champs obligatoires ne sont pas renseignés');
+            } else{
+                //on vérifie si un film existe déja
+                $titreBdd = $moviesRepository->findOneBy(array('titre' => $titre));
+                if($titreBdd) {
+                    $this->addFlash('danger', 'Ce film existe déjà');
+                    throw new Exception('Ce film existe déjà');
+                }
+                //S'il existe pas on insère
+                $newMovie = new Movies();
+                $newMovie->setType($type)
+                        ->setTitre($titre)
+                        ->setAffiche($affiche)
+                        ->setGenre($genre)
+                        ->setDateSortie($dateSortie)
+                        ->setRealisateurs($realisateurs)
+                        ->setActeurs($acteurs)
+                        ->setSynopsis($synopsis)
+                        ->setNote($note)
+                        ->setDispoPlateforme($plateforme);
+                $manager->persist($newMovie);
+                $manager->flush();
+                $manager->commit();
+                $lastId = $newMovie->getId();
+                
+                $this->addFlash('success', 'Le film a bien été créé');
+                $return['message'] = "Le film a bien été créé";
+                $return['success'] = true;
+                $return['lastID'] = $lastId;
+            }
+        } catch (\Exception $e) {
+            $manager->rollBack();
+            $return['success'] = false;
+            $return['message'] = $e->getMessage();
+        } 
+        return new JsonResponse($return);
     }
 
 }

@@ -141,10 +141,10 @@
 
 .top-menu .current-user-login .login-box .user-icon {
     position: absolute;
-    top: 25px;
+    top: 60px;
     right: 20px;
     color: #e5e5e5;
-    font-size: 55px;
+    font-size: 30px;
     z-index: 0; 
 }
 

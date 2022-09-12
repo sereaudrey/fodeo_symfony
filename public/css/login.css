@@ -63,7 +63,7 @@ img {
     display: block;
 }
 
-.field-box input {
+.field-box input, .field-box select, .field-box textarea {
     width: 100%;
     border: 1px solid #c98fdb;
     padding: 5px;

@@ -38,7 +38,7 @@ class Movies
     private $genre;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $date_sortie;
 
@@ -120,12 +120,12 @@ class Movies
         return $this;
     }
 
-    public function getDateSortie(): ?\DateTimeInterface
+    public function getDateSortie(): ?string
     {
         return $this->date_sortie;
     }
 
-    public function setDateSortie(?\DateTimeInterface $date_sortie): self
+    public function setDateSortie(?string $date_sortie): self
     {
         $this->date_sortie = $date_sortie;
 

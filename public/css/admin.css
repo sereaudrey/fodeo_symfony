@@ -275,3 +275,84 @@ table tbody tr, table tbody tr:nth-child(odd) {
     opacity: 1;
 }
 /*Ajout contenu*/
+/*Notation*/
+a[href*="intent"] {
+    display:inline-block;
+    margin-top: 0.4em;
+}
+
+.notation {
+    font-size: 30px;
+    overflow:hidden;
+}
+.notation a {
+    float: right;
+    color: #aaa;
+    text-decoration: none;
+    -webkit-transition: color .4s;
+    -moz-transition: color .4s;
+    -o-transition: color .4s;
+    transition: color .4s;
+}
+.notation a:hover,
+.notation a:hover ~ a,
+.notation a:focus,
+.notation a:focus ~ a		{
+    color: orange;
+    cursor: pointer;
+}
+
+.notation2 a{
+    float:none;
+}
+
+.notation2 {    
+    direction: rtl;
+}
+
+.add-content {
+    margin: 5% 15%;
+    width: 70%;
+    border: 3px solid #5f708b;
+    border-radius: 5px;
+    padding-bottom: 50px;
+}
+
+.radio-input {
+    float: left;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    height: 30px;
+}
+
+.content-form-movie {
+    padding: 5% 20%;
+}
+
+.add-movie input, .add-movie select, .add-movie textarea {
+    display: inline;
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #eacbf0;
+    margin: 10px;
+    border-radius: 3px;
+}
+
+.add-movie label {
+    display: block;
+    float: left;
+    width: 40%;
+    text-align: left;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.add-movie {
+    text-align: center;
+}
+
+.btn-add-movie {
+    float: right;
+    margin-right: 10px;
+}

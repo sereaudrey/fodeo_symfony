@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<input type="hidden" id="urlAddMovie" value="{{ path('add-movieRequest') }}"/>
+    <div class="home-title-button">
+        <h1>
+            <i class="fas fa-plus"></i>
+            Ajouter du contenu dans le catalogue
+        </h1>
+        
+        {% for message in app.flashes('success') %}
+            <div class="message-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('danger') %}
+            <div class="message-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="add-content">
+        <div class="content-form-movie" id="addMovie">
+            <form action="" method="POST" class="add-movie">
+                    <div class="radio">
+                        <label for="typeAdd">Type :</label>
+                        <div class="radio-input">
+                            <input class="radio-right" type="radio" id="add_typeF_input" name="add_type" value="Film" checked>
+                            <p class="radio-right" for="Film">Film</p>
+                            <input class="radio-right" type="radio" id="add_typeS_input" name="add_type" value="Série">
+                            <p class="radio-right" for="Série">Série</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="titleAdd">Titre :</label>
+                        <input type="text" id="add_titre_input" name="add_titre" value="" required>
+                    </div>
+                    <div>
+                        <label for="lienAffiche">Lien de l'affiche :</label>
+                        <input type="text" id="add_affiche_input" name="add_affiche" value="" required>
+                    </div>
+                    <div>
+                        <label for="genre">Genre :</label>
+                        <select name="add_genre" id="add_genre_select" required>
+                            <option value="Fantastique">Fantastique</option>
+                            <option value="Action">Action</option>
+                            <option value="Comédie">Comédie</option> 
+                            <option value="Horreur">Horreur</option> 
+                            <option value="Romance">Romance</option> 
+                            <option value="Animé">Animé</option> 
+                            <option value="Enfants">Enfants</option> 
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dateSortieAdd">Date de sortie :</label>
+                        <input type="date" id="add_date_input" name="add_date" value="">
+                    </div>
+                    <div>
+                        <label for="synopsis">Synopsis :</label>
+                        <textarea type="text" id="add_synopsis_input" name="add_synopsis" value=""></textarea>
+                    </div>
+                    <div>
+                        <label for="realisateurs">Réalisateurs :</label>
+                        <input type="text" id="add_realisateurs_input" name="add_realisateurs" value="" required>
+                    </div>
+                    <div>
+                        <label for="acteurs">Acteurs :</label>
+                        <input type="text" id="add_acteurs_input" name="add_acteurs" value="" required>
+                    </div>
+                    <div class="note">
+                        <label for="note">Note :</label>
+                        <input type="number" name="add_note" step=".5", max="5" min="0">
+                    </div>
+                    <div>
+                        <label for="lienPlateforme">Lien de la plateforme :</label>
+                        <input type="text" id="add_lienPlat_input" name="add_plateforme" value="">
+                    </div>
+                </div>
+                
+                <div class="footer-form">
+                    <button class="btn-add-movie" id="BtnAddMovie">
+                        <i class="fas fa-save"></i>
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

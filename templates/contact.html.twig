@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div id="contact-content">
+    <div class="home-title-button">
+        <h1>
+            <img src="img/logo.png" alt="logo du site">
+            Un problème ? Une question ? Dites le nous !
+        </h1>
+        {% for message in app.flashes('success') %}
+            <div class="message-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('danger') %}
+            <div class="message-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %} 
+    </div>
+    <div class="form-contact">
+
+            <h2>Formulaire</h1>
+
+            <form action="{{ path('contactPost')}}" method="post">
+                
+                <div class="field-box contact">
+                    <label for="email">Email :</label>
+                    <input type="email" name="email_contact" value="" required />
+                </div>
+
+                <div class="field-box contact">
+                    <label for="sujet">Sujet :</label>
+                    <select name="sujet_contact" value "" required>
+                        <option value="AjoutCatalogue">Ajouter un film ou une série</option>
+                        <option value="PbCompte">Problème avec mon compte</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="field-box contact">
+                    <label for="description">Décrivez votre problème /demande :</label>
+                    <textarea name="description_contact" value "" required></textarea>
+                </div>
+
+                <button type"submit">Envoyer</button><br>
+            </form>
+        </div>
+</div>
+{% endblock %}

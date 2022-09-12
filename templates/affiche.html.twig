@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <input type="hidden" id="modifPunchoutOCI" value=""/>
     <div class="message-confirm-supp" id="MessageSupp">
-        <p>Êtes-vous sûr de vouloir supprimer ce punchout ? </p>
+        <p>Êtes-vous sûr de vouloir supprimer ce film ? </p>
         <button id="AnnulSuppression" class="btn-annule-suppression">Annuler</button>
         <a class="lien-url-supp" href="">
             <button id="ConfirmerSuppression" class="btn-confirm-suppression">
@@ -11,7 +10,7 @@
             </button>
         </a>
     </div>
-    <div class="main-content-punchout">
+    <div class="main-content-affiche" id="content_affiche_film">
         <div class="home-title-button">
             <h1>{{ donneesFilm.titre }}</h1>
             {% for message in app.flashes('success') %}
@@ -24,12 +23,14 @@
                     {{ message }}
                 </div>
             {% endfor %}
-            {# {% if app.user.role == constant('App\\Main\\Variables::ADMIN') %} #}
-                <button class="btn-del" urlSupp="">
-                    <i class="fas fa-times"></i>
-                    Supprimer
-                </button>
-            {# {% endif %} #}
+            {% if app.user is not empty %}
+                {% if app.user.role == 'Administrateur' %}
+                    <button class="btn-del" id="BtnDelMovie" urlSupp="{{ path('movieDelete') ~ '?id=' ~ donneesFilm.id|number_format }}">
+                        <i class="fas fa-times"></i>
+                        Supprimer
+                    </button>
+                {% endif %}
+            {% endif %}
         </div>
         <div class="infos-content">
             <img src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
@@ -40,10 +41,10 @@
                 <div class="synopsis_affiche">Synopsis : {{ donneesFilm.synopsis}}</div> <br>
                 <div class="donnees_affiche">Genre : {{ donneesFilm.genre}}</div> <br>
                 <div class="donnees_affiche">Date de sortie : {{ donneesFilm.dateSortie|date('d/m/Y')}}</div> <br>
-                <div class="donnees_affiche">Note : {{ donneesFilm.note}}</div> <br>
+                <div class="donnees_affiche">Note : {{ donneesFilm.note}}/5</div> <br>
                 <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div> <br>
-
             </div>
+            <a href="{{ path("pdf") ~ "?id=" ~ donneesFilm.id|number_format }}"><button class="btnPdf">Exporter en PDF</button></a>
         </div>
                
     </div>

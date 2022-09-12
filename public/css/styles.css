@@ -135,3 +135,11 @@ h1 i {
     color: #4a85cd;
     font-size: 20px;
 }
+
+.contact {
+    width: 100%;
+}
+
+.form-contact {
+    width: 50%;
+}

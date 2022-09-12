@@ -1,0 +1,40 @@
+.profilImg {
+    border-radius: 125px;
+}
+
+.infos_user {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.block-left, .block-right {
+    width: 30%;
+}
+
+.buttonUser {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.content-infos-edit {
+    display: none;
+}
+
+.content-infos-edit .buttonUser {
+    text-align: right;
+}
+
+.content-infos-mdp {
+    display: none;
+}
+
+.content-infos-mdp .buttonUser {
+    text-align: right;
+}
+
+.input-avatar input{
+    border: none;
+    padding: 0;
+}
+ 

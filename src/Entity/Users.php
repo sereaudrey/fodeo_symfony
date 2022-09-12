@@ -39,6 +39,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $pseudo;
 
+     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $img_profil;
+
     /**
      * @ORM\Column(type="string", length=200)
      */
@@ -113,6 +118,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getImgProfil(): ?string
+    {
+        return $this->img_profil;
+    }
+
+    public function setImgProfil(string $img_profil): self
+    {
+        $this->img_profil = $img_profil;
 
         return $this;
     }

@@ -12,6 +12,24 @@
             </div>
         </div>
     </a>
+    <a href="{{ path('contact') }}">
+        <div class="item liste">
+            <div class="view">
+                <i class="fas fa-envelope"></i>
+                <div class="libelle">Nous contacter</div>
+            </div>
+        </div>
+    </a>
+    {% if app.user is not empty %}
+        <a href="{{ path('dashboardUser') }}"/>
+            <div class="item dash"> 
+                <div class="view">
+                    <i class="fas fa-id-card"></i>
+                    <div class="libelle">Mon tableau de bord</div>
+                </div>
+            </div>
+        </a>
+    {% endif %}
     {% if app.user is not empty %}
         {% if app.user.role == 'Administrateur' %}
             <a href="{{ path('admin') }}"/>
