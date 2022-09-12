@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 class MovieController extends AbstractController
 {
     /**
@@ -31,7 +30,7 @@ class MovieController extends AbstractController
                         ->getQuery()
                         ->getResult();
         } else {
-        //Récupérer les punchouts
+        //Récupérer les films
             $data = $moviesRepository->findBy(
                 array(),
                 array('titre' => 'ASC')

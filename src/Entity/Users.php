@@ -17,7 +17,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -63,6 +63,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $reset_token;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $active_token;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -178,6 +183,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetToken(?string $reset_token): self
     {
         $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+    public function getActiveToken(): ?string
+    {
+        return $this->active_token;
+    }
+
+    public function setActiveToken(?string $active_token): self
+    {
+        $this->active_token = $active_token;
 
         return $this;
     }

@@ -202,7 +202,7 @@ class SecurityController extends AbstractController
     * @Route("/createUser", name="createUser")
     */
     public function createUser(Request $request, UserPasswordHasherInterface $hash, EntityManagerInterface $manager, 
-    UsersRepository $usersRepository) 
+    UsersRepository $usersRepository, TokenGeneratorInterface $tokenGenerate, MailerInterface $mailer) 
     {
        $email = $request->get('email_newUser');
        $username = $request->get('username');
@@ -231,6 +231,8 @@ class SecurityController extends AbstractController
                 $this->addFlash('danger', 'Cet utilisateur existe déjà');
                 throw new Exception('Cet utilisateur existe déjà');
             }  
+            //On génère un token
+            $token =$tokenGenerate->generateToken();
             $newUser = new Users($email, $mdp);
             $hash = $hash->hashPassword($newUser, $mdp);
             $newUser->setEmail($email)
@@ -239,14 +241,33 @@ class SecurityController extends AbstractController
                     ->setNom($nom)
                     ->setPrenom($prenom)
                     ->setPseudo($username)
-                    ->setRole($role);
+                    ->setRole($role)
+                    ->setActiveToken($token);
             $manager->persist($newUser);
             $manager->flush();
             $manager->commit();
-        }
 
-        $this->addFlash('success', 'Votre compte a bien été créé');
-        $return['message'] = 'Votre compte a bien été créé';
+            // On génère l'url d'activation du compte
+            $url = $this->generateUrl('activer-compte', ['token'=> $token], UrlGeneratorInterface::ABSOLUTE_URL);
+            //on prépare le mail
+            $mail = (new TemplatedEmail())
+                ->from('do_not_reply@fodeo.com')
+                ->to('test@mailhog.local')
+                ->subject('Fodéo - Activer votre compte')
+                ->htmlTemplate('security/mailActiveCompte.html.twig')
+                ->context([
+                    'url' => $url,
+                    'prenom' => $prenom
+                ]);
+            try {
+                $mailer->send($mail);
+                $this->addFlash('success', 'Votre compte a bien été créé. Un email avec un lien de confirmation vous a été envoyé');
+                $return['message'] = 'Votre compte a bien été créé';
+            } catch(\Exception $e) {
+                $this->addFlash('danger', 'Une erreur est survenue dans l\'envoi du mail. Merci de contacter l\'équipe informatique');
+                throw new Exception('Erreur : '.$e->getMessage());
+            }
+        }
             
        }catch(Exception $e) {
         $manager->rollBack();
@@ -255,5 +276,27 @@ class SecurityController extends AbstractController
        }
 
         return $this->redirectToRoute('login');
+    }
+
+    /**
+    * @Route("/activer-compte{token}", name="activer-compte")
+    */
+    public function ActiverCompte($token, UsersRepository $users, EntityManagerInterface $manager)
+    {
+        // On vérifie si un utilisateur avec ce token existe dans la base de données 
+        $user = $users->findOneBy(['active_token' => $token]); 
+        // Si aucun utilisateur n'est associé à ce token 
+        if(!$user){ 
+            // On renvoie une erreur 404 
+            throw $this->createNotFoundException('Cet utilisateur n\'existe pas'); 
+        } 
+        // On supprime le token 
+        $user->setActiveToken(null); 
+        $manager->persist($user); 
+        $manager->flush(); 
+        // On génère un message 
+        $this->addFlash('success', 'Votre compte a bien été activé !'); 
+        // On retourne à l'accueil 
+        return $this->redirectToRoute('home');
     }
 }

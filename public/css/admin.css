@@ -430,10 +430,6 @@ a[href*="intent"] {
     }
 }
 
-@media only screen and (max-width: 376px) {
-
-}
-
 @media only screen and (max-width: 321px) {
     /*Ajout Contenu*/
     .radio-input {
