@@ -46,7 +46,7 @@
     text-align: justify;
 }
 
-.infos-content img {
+.img_affiche_film {
     width: 415px;
     float: left;
     min-height: 585px;
@@ -76,6 +76,27 @@
     margin-bottom: 2%;
 }
 
+.title-inline {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.block_bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.qrCode_size img{
+    width: 100px;
+    height: 100px;
+    margin-top: -6px;
+}
+
 /*Modifier film*/
 .btn-del, .btn-cancel-movie {
     display: none;
@@ -98,7 +119,7 @@
     /*Catalogue*/
 
     /*Affiche*/
-    .infos-content img {
+    .img_affiche_film {
         width: 25%;
         min-height: 475px;
     }
@@ -134,7 +155,7 @@
         padding: 30px 30px;
     }
     /*Affiche*/
-    .infos-content img {
+    .img_affiche_film {
         width: 30%;
         min-height: 460px;
     }
@@ -155,7 +176,7 @@
         font-size: 1.6em;
     }
     /*Affiche*/
-    .infos-content img {
+    .img_affiche_film {
         width: 100%;
         min-height: 460px;
         float: none;
@@ -167,6 +188,10 @@
         margin-left: 0;
     }
 
+    .title-inline {
+        margin-top: 2%;
+    }
+
 }
 
 @media only screen and (max-width: 426px) {
@@ -176,12 +201,41 @@
     }
 
     /*Affiche*/
-    .infos-content img {
+    .img_affiche_film {
         margin-top: 2%;
     }
 
     .donneesFilm {
         padding: 0;
+    }
+
+    .title-inline {
+        display: block;
+    }
+
+    .btnPdf {
+        float: left;
+        margin: 0px 30% 5%;
+    }
+
+    .realisateur_affiche {
+        margin-top: 7%;
+    }
+
+    .block_bottom {
+        display: block;
+    }
+
+    .qrCode_size img {
+        margin-left: 35%;
+    }
+
+    .buttonMovie {
+        margin: 0px 39% 5%;
+    }
+
+    .main-content-affiche .home-title-button {
+        display: block;
     }
 
 }
@@ -204,7 +258,7 @@
     h1 {
         font-size: 1.5em;
     }
-    .infos-content img {
+    .img_affiche_film {
         margin-top: 2%;
         min-height: 415px;
     }
@@ -225,6 +279,14 @@
         font-size: 0.8em;
     }
 
+    .btnPdf {
+        margin: 5% 29%;
+    }
+
+    .buttonMovie {
+        margin: -10px 39% 5%;
+    }
+
 }
 
 @media only screen and (max-width: 321px) {
@@ -235,15 +297,23 @@
     }
 
     .movie-content {
-        margin-left: 0%;
+        margin-left: -3%;
     }
 
     /*Affiche*/
     h1 {
         font-size: 1.2em;
     }
-    .infos-content img {
+    .img_affiche_film {
         margin-top: 2%;
         min-height: 320px;
     } 
+
+    .btnPdf {
+        margin: 5% 24%;
+    }
+
+    .qrCode_size img {
+        margin-left: 35%;
+    }
 }

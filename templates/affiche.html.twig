@@ -32,7 +32,7 @@
             {% endfor %}
             {% if app.user is not empty %}
                 {% if app.user.role == 'Administrateur' %}
-                <divclass="buttonMovie">
+                <div class="buttonMovie">
                     <button class="btn-edit-movie">Modifier</button>
                     <button class="btn-cancel-movie">Annuler</button>
                     <button class="btn-del" id="BtnDelMovie" urlSupp="{{ path('movieDelete') ~ '?id=' ~ donneesFilm.id|number_format }}">
@@ -44,26 +44,34 @@
             {% endif %}
         </div>
         <div class="infos-content">
-            <img src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
+            <img class="img_affiche_film" src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
 
             <div class="donneesFilm">
-                <h2 class="titre_affiche">{{donneesFilm.titre}}</h2> <br>
+                <div class="title-inline">
+                    <h2 class="titre_affiche">{{donneesFilm.titre}}</h2> 
+                    <a href="{{ path("pdf") ~ "?id=" ~ donneesFilm.id|number_format }}"><button class="btnPdf">Exporter en PDF</button></a><br>
+                </div><br>
                 <div class=" realisateur_affiche">Réalisateur(s) : {{ donneesFilm.realisateurs}}</div> <br>
                 <div class="acteur_affiche">Acteur(s) : {{ donneesFilm.acteurs }}</div> <br>
                 <div class="synopsis_affiche">Synopsis : {{ donneesFilm.synopsis}}</div> <br>
-                <div class="donnees_affiche">Genre : {{ donneesFilm.genre}}</div> <br>
-                <div class="donnees_affiche">Date de sortie : {{ donneesFilm.dateSortie|date('d/m/Y')}}</div> <br>
-                <div class="donnees_affiche">Note : {{ donneesFilm.note}}/5</div> <br>
-                <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div> <br>
-            <a href="{{ path("pdf") ~ "?id=" ~ donneesFilm.id|number_format }}"><button class="btnPdf">Exporter en PDF</button></a>
+                <div class="block_bottom">
+                    <div>
+                        <div class="donnees_affiche">Genre : {{ donneesFilm.genre}}</div> <br>
+                        <div class="donnees_affiche">Date de sortie : {{ donneesFilm.dateSortie|date('d/m/Y')}}</div> <br>
+                        <div class="donnees_affiche">Note : {{ donneesFilm.note}}/5</div> <br>
+                        <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div>
+                    </div>
+                    <div class="qrcode">
+                        <div class="qrCode_size">
+                            <p class="txt_qrcode">Visionnez la bande d'annonce :</p>
+                            <img src="{{ qr_code_url(qrCodeUrl) }}" alt="lien qrCode du film {{ donneesFilm.titre }}"/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        </div>
-            <p class="txt_qrcode">Visionnez la bande d'annonce :</p>
-            <div class="qrCode_size">
-                <img src="{{ qr_code_url(qrCodeUrl) }}" alt="lien qrCode du film {{ donneesFilm.titre }}"/>
-            </div>
+        
         <div class="edit-infos-content">
             <div class="content-form-movie">
                 <form action="{{ path('movieEdit') }}" method="POST" class="edit-movie form-movie">
