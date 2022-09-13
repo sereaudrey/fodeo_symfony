@@ -1,0 +1,8 @@
+.qrCode_size img{
+    width: 40%;
+    height: 54px;
+
+}
+p.txt_qrcode{
+    width: 20%;
+}

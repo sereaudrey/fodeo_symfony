@@ -34,6 +34,7 @@
         </div>
         <div class="infos-content">
             <img src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
+
             <div class="donneesFilm">
                 <h2 class="titre_affiche">{{donneesFilm.titre}}</h2> <br>
                 <div class=" realisateur_affiche">Réalisateur(s) : {{ donneesFilm.realisateurs}}</div> <br>
@@ -44,7 +45,13 @@
                 <div class="donnees_affiche">Note : {{ donneesFilm.note}}/5</div> <br>
                 <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div> <br>
             </div>
+            <p class="txt_qrcode">Votre bande d'annonce à scanner :</p>
+            <div class="qrCode_size">
+            <img src="{{ qr_code_url(qrCodeUrl) }}" alt="lien qrCode du film {{ donneesFilm.titre }}"/>
+            <div>
+
             <a href="{{ path("pdf") ~ "?id=" ~ donneesFilm.id|number_format }}"><button class="btnPdf">Exporter en PDF</button></a>
+            
         </div>
                
     </div>

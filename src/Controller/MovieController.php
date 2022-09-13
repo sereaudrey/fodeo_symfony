@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Movies;
 use Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Endroid\QrCode\Builder\BuilderInterface;
+
 class MovieController extends AbstractController
 {
     /**
@@ -60,11 +63,15 @@ class MovieController extends AbstractController
         // Récupérer l'id de l'URL
         $id = $request->get('id');
         $filmInfos = $moviesRepository->find($id);
+        
 
+        $bande_annonce = $filmInfos->getBandeAnnonce();
         return $this->render('affiche.html.twig', [
             'pageName' => 'details_affiche_film',
             'title' => 'Affiche du Film',
             'donneesFilm' => $filmInfos,
+            'qrCodeUrl' => $bande_annonce,
+
         ]);
     }
 

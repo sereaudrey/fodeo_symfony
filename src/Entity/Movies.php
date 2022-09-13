@@ -63,9 +63,19 @@ class Movies
     private $note;
 
     /**
-     * @ORM\Column(type="string", length=250, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $dispo_plateforme;
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    private $qrcode_Url;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bande_annonce;
 
     public function getId(): ?int
     {
@@ -188,6 +198,30 @@ class Movies
     public function setDispoPlateforme(?string $dispo_plateforme): self
     {
         $this->dispo_plateforme = $dispo_plateforme;
+
+        return $this;
+    }
+
+    public function getQrCodeUrl(): ?string
+    {
+        return $this->qrcode_Url;
+    }
+
+    public function setQrCodeUrl(?string $qrcode_Url): self
+    {
+        $this->qrcode_Url = $qrcode_Url;
+
+        return $this;
+    }
+
+    public function getBandeAnnonce(): ?string
+    {
+        return $this->bande_annonce;
+    }
+
+    public function setBandeAnnonce(?string $bande_annonce): self
+    {
+        $this->bande_annonce = $bande_annonce;
 
         return $this;
     }
