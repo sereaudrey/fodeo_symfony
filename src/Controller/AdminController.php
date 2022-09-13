@@ -228,8 +228,7 @@ class AdminController extends AbstractController
         $acteurs = $request->get('add_acteurs');
         $note = $request->get('add_note');
         $plateforme = $request->get('add_plateforme');
-
-        //dd($type, $titre, $affiche, $genre, $dateSortie, $synopsis, $realisateurs, $acteurs, $note, $plateforme);
+        $bande_annonce = $request->get('add_ba');
 
         $manager->beginTransaction();
 
@@ -262,7 +261,8 @@ class AdminController extends AbstractController
                         ->setActeurs($acteurs)
                         ->setSynopsis($synopsis)
                         ->setNote($note)
-                        ->setDispoPlateforme($plateforme);
+                        ->setDispoPlateforme($plateforme)
+                        ->setBandeAnnonce($bande_annonce);
                 $manager->persist($newMovie);
                 $manager->flush();
                 $manager->commit();
@@ -279,6 +279,82 @@ class AdminController extends AbstractController
             $return['message'] = $e->getMessage();
         } 
         return new JsonResponse($return);
+    }
+
+     /**
+     * @Route("/movieEdit", name="movieEdit")
+     */
+    public function movieEdit(Request $request, EntityManagerInterface $manager, MoviesRepository $moviesRepository): Response
+    {
+        $id = $request->get('idMovie');
+        $donneesFilm = $moviesRepository->find($id);        
+        //On récupère les données du formulaire
+        $type = $request->get('update_type');
+        $titre = $request->get('update_titre');
+        $affiche =$request->get('update_affiche');
+        $genre = $request->get('update_genre');
+        $dateSortie = $request->get('update_date');
+        $synopsis = $request->get('update_synopsis');
+        $realisateurs = $request->get('update_realisateurs');
+        $acteurs = $request->get('update_acteurs');
+        $note = $request->get('update_note');
+        $plateforme = $request->get('update_plateforme');
+        $bande_annonce = $request->get('update_ba');
+
+        if($synopsis == "") {
+            $synopsis = $donneesFilm->getSynopsis();
+        }
+
+        $manager->beginTransaction();
+
+        try {
+            if(
+                empty($type) ||
+                empty($titre) ||
+                empty($affiche) ||
+                empty($acteurs) ||
+                empty($synopsis)
+            ) {
+                $this->addFlash('danger', 'Tous les champs ne sont pas renseignés');
+                throw new Exception('Tous les champs ne sont pas renseignés');
+            } else {
+                $userUpdate = $moviesRepository->createQueryBuilder('u')
+                ->update()
+                ->set('u.type', ':type')
+                ->set('u.titre', ':titre')
+                ->set('u.genre', ':genre')
+                ->set('u.date_sortie', ':dateSortie')
+                ->set('u.synopsis', ':synopsis')
+                ->set('u.realisateurs', ':realisateurs')
+                ->set('u.acteurs', ':acteurs')
+                ->set('u.note', ':note')
+                ->set('u.dispo_plateforme', ':plateforme')
+                ->set('u.bande_annonce', ':bande_annonce')
+                ->where('u.id = :id')
+                ->setParameter('id', $id)
+                ->setParameter('type', $type)
+                ->setParameter('titre', $titre)
+                ->setParameter('genre', $genre)
+                ->setParameter('dateSortie', $dateSortie)
+                ->setParameter('synopsis', $synopsis)
+                ->setParameter('realisateurs', $realisateurs)
+                ->setParameter('acteurs', $acteurs)
+                ->setParameter('note', $note)
+                ->setParameter('plateforme', $plateforme)
+                ->setParameter('bande_annonce', $bande_annonce)
+                ->getQuery()
+                ->getResult();
+            }
+
+            $this->addFlash('success', 'Le film a bien été modifié');
+            $return['message'] = 'Le film a bien été modifié';
+            $manager->flush();
+            $manager->commit();
+        } catch(\Exception $e) {
+            $manager->rollback();
+            $return['message'] = $e->getMessage();
+        }
+        return $this->redirectToRoute('affiche', ['id' => $id]);
     }
 
 }

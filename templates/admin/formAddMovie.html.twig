@@ -21,7 +21,7 @@
     </div>
     <div class="add-content">
         <div class="content-form-movie" id="addMovie">
-            <form action="" method="POST" class="add-movie">
+            <form action="" method="POST" class="form-movie">
                     <div class="radio">
                         <label for="typeAdd">Type :</label>
                         <div class="radio-input">
@@ -69,11 +69,22 @@
                     </div>
                     <div class="note">
                         <label for="note">Note :</label>
-                        <input type="number" name="add_note" step=".5", max="5" min="0">
+                        <input type="number" name="add_note" step=".1", max="5" min="0">
                     </div>
                     <div>
-                        <label for="lienPlateforme">Lien de la plateforme :</label>
-                        <input type="text" id="add_lienPlat_input" name="add_plateforme" value="">
+                        <label for="lienPlateforme">Plateforme :</label>
+                        <select id="add_lienPlat_select" name="add_plateforme" required>
+                            <option value="Netflix">Netflix</option>
+                            <option value="Prime Vidéo">Prime Vidéo</option>
+                            <option value="Disney+">Disney+</option> 
+                            <option value="OCS">OCS</option> 
+                            <option value="Salto">Salto</option> 
+                            <option value="Canal+">Canal+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="bande_annonce">Bande annonce :</label>
+                        <input type="text" name="add_ba" value="">
                     </div>
                 </div>
                 

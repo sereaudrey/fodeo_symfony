@@ -327,10 +327,10 @@ a[href*="intent"] {
 }
 
 .content-form-movie {
-    padding: 5% 20%;
+    padding: 5% 20% 0;
 }
 
-.add-movie input, .add-movie select, .add-movie textarea {
+.form-movie input, .form-movie select, .form-movie textarea {
     display: inline;
     width: 50%;
     box-sizing: border-box;
@@ -339,7 +339,7 @@ a[href*="intent"] {
     border-radius: 3px;
 }
 
-.add-movie label {
+.form-movie label {
     display: block;
     float: left;
     width: 40%;
@@ -348,7 +348,7 @@ a[href*="intent"] {
     border-bottom: 1px solid #bdbdbd;
 }
 
-.add-movie {
+.form-movie {
     text-align: center;
 }
 

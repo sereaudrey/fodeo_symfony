@@ -73,8 +73,26 @@
 
 .btnPdf {
     float: right;
+    margin-bottom: 2%;
 }
 
+/*Modifier film*/
+.btn-del, .btn-cancel-movie {
+    display: none;
+}
+
+.edit-infos-content {
+    display: none;
+    margin: 5% 15%;
+    width: 70%;
+    border: 3px solid #5f708b;
+    border-radius: 5px;
+    padding-bottom: 50px;
+}
+
+.btn-save-edit-movie {
+    margin-top: 5%;
+}
 /*RESPONSIVE*/
 @media only screen and (max-width: 1441px) {
     /*Catalogue*/

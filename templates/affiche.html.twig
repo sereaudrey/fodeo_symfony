@@ -12,7 +12,14 @@
     </div>
     <div class="main-content-affiche" id="content_affiche_film">
         <div class="home-title-button">
-            <h1>{{ donneesFilm.titre }}</h1>
+            <h1>
+                <a href="{{ path('home') }}">
+                    <button class="history">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </a>
+                {{ donneesFilm.titre }}
+            </h1>
             {% for message in app.flashes('success') %}
                 <div class="message-success" role="alert">
                     {{ message }}
@@ -25,10 +32,14 @@
             {% endfor %}
             {% if app.user is not empty %}
                 {% if app.user.role == 'Administrateur' %}
+                <divclass="buttonMovie">
+                    <button class="btn-edit-movie">Modifier</button>
+                    <button class="btn-cancel-movie">Annuler</button>
                     <button class="btn-del" id="BtnDelMovie" urlSupp="{{ path('movieDelete') ~ '?id=' ~ donneesFilm.id|number_format }}">
                         <i class="fas fa-times"></i>
                         Supprimer
                     </button>
+                </div>
                 {% endif %}
             {% endif %}
         </div>
@@ -53,6 +64,83 @@
             <div class="qrCode_size">
                 <img src="{{ qr_code_url(qrCodeUrl) }}" alt="lien qrCode du film {{ donneesFilm.titre }}"/>
             </div>
+        <div class="edit-infos-content">
+            <div class="content-form-movie">
+                <form action="{{ path('movieEdit') }}" method="POST" class="edit-movie form-movie">
+                    <input type="hidden" name="idMovie" value=" {{ donneesFilm.id }}">
+                    <div class="radio">
+                        <label for="typeAdd">Type :</label>
+                        <div class="radio-input">
+                            <input class="radio-right" type="radio"name="update_type" value="Film" checked>
+                            <p class="radio-right" for="Film">Film</p>
+                            <input class="radio-right" type="radio" name="update_type" value="Série">
+                            <p class="radio-right" for="Série">Série</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="titleAdd">Titre :</label>
+                        <input type="text" name="update_titre" value="{{ donneesFilm.titre }}" required>
+                    </div>
+                    <div>
+                        <label for="lienAffiche">Lien de l'affiche :</label>
+                        <input type="text" name="update_affiche" value="{{ donneesFilm.affiche }}" required>
+                    </div>
+                    <div>
+                        <label for="genre">Genre :</label>
+                        <select name="update_genre" required>
+                            <option value="Fantastique" {{ donneesFilm.genre == "Fantastique" ? "selected" : ""}}>Fantastique</option>
+                            <option value="Action" {{ donneesFilm.genre == "Action" ? "selected" : ""}}>Action</option>
+                            <option value="Comédie" {{ donneesFilm.genre == "Comédie" ? "selected" : ""}}>Comédie</option> 
+                            <option value="Horreur" {{ donneesFilm.genre == "Horreur" ? "selected" : ""}}>Horreur</option> 
+                            <option value="Romance" {{ donneesFilm.genre == "Romance" ? "selected" : ""}}>Romance</option> 
+                            <option value="Animé" {{ donneesFilm.genre == "Animé" ? "selected" : ""}}>Animé</option> 
+                            <option value="Enfants" {{ donneesFilm.genre == "Enfants" ? "selected" : ""}}>Enfants</option> 
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dateSortieAdd">Date de sortie :</label>
+                        <input type="date" name="update_date" value="{{ donneesFilm.dateSortie }}">
+                    </div>
+                    <div>
+                        <label for="synopsis">Synopsis :</label>
+                        <textarea type="text" name="update_synopsis" value="{{ donneesFilm.synopsis }}"></textarea>
+                    </div>
+                    <div>
+                        <label for="realisateurs">Réalisateurs :</label>
+                        <input type="text" name="update_realisateurs" value="{{ donneesFilm.realisateurs }}" required>
+                    </div>
+                    <div>
+                        <label for="acteurs">Acteurs :</label>
+                        <input type="text" name="update_acteurs" value="{{ donneesFilm.acteurs }}" required>
+                    </div>
+                    <div class="note">
+                        <label for="note">Note :</label>
+                        <input type="number" name="update_note" step=".1", max="5" min="0" value="{{ donneesFilm.note }}">
+                    </div>
+                    <div>
+                        <label for="lienPlateforme">Plateforme :</label>
+                        <select name="update_plateforme" required>
+                            <option value="Netflix" {{ donneesFilm.dispoPlateforme == "Netflix" ? "selected" : ""}}>Netflix</option>
+                            <option value="Prime Vidéo" {{ donneesFilm.dispoPlateforme == "Prime Vidéo" ? "selected" : ""}}>Prime Vidéo</option>
+                            <option value="Disney+" {{ donneesFilm.dispoPlateforme == "Disney+" ? "selected" : ""}}>Disney+</option> 
+                            <option value="OCS" {{ donneesFilm.dispoPlateforme == "OCS" ? "selected" : ""}}>OCS</option> 
+                            <option value="Salto" {{ donneesFilm.dispoPlateforme == "Salto" ? "selected" : ""}}>Salto</option> 
+                            <option value="Canal+" {{ donneesFilm.dispoPlateforme == "Canal+" ? "selected" : ""}}>Canal+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="bande_annonce">Bande annonce :</label>
+                        <input type="text" name="update_ba" value="{{ donneesFilm.bandeAnnonce }}">
+                    </div>  
+                    <div class="footer-form">
+                        <button type="submit" class="btn-save-edit-movie" id="BtnEditMovie">
+                            <i class="fas fa-save"></i>
+                            Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
                
     </div>
 {% endblock %}
