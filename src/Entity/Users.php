@@ -17,7 +17,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    public $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=50)

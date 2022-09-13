@@ -12,8 +12,7 @@ $(document).ready(function () {
   $('#BtnAddMovie').click(function(e) {
       e.preventDefault();
       //On compresse les données en une seule ligne
-      let dataMovie = $('.add-movie').serialize();
-  
+      let dataMovie = $('.form-movie').serialize();
       //Envoi des données
       try {
       $.ajax({
@@ -38,7 +37,7 @@ $(document).ready(function () {
   });
 
   //Supprimer un film
-  $('#BtnDelMovie').bind('click', (function(e) {
+  $('#BtnDelMovie').click(function(e) {
     //On récupère l'url 
     url = $(this).attr('urlSupp');
     if($('#MessageSupp').css('display') == 'none') {
@@ -57,7 +56,7 @@ $(document).ready(function () {
       //On insère la bonne url dans le href du bouton confirmer la suppression
       $('.lien-url-supp').attr('href', url);
     });
-  }));
+  });
 
   //Modifier un film {
   $('.btn-edit-movie').click(function(e) {
@@ -66,7 +65,7 @@ $(document).ready(function () {
     $('.edit-infos-content, .btn-cancel-movie, .btn-del').show();
   })
   //Annuler la modif
-  $('btn-cancel-movie').click(function() {
+  $('.btn-cancel-movie').click(function() {
     location.reload(true);
   });
 
