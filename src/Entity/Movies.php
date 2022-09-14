@@ -68,11 +68,6 @@ class Movies
     private $dispo_plateforme;
 
     /**
-     * @ORM\Column(type="string", length=250, nullable=true)
-     */
-    private $qrcode_Url;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $bande_annonce;
@@ -198,18 +193,6 @@ class Movies
     public function setDispoPlateforme(?string $dispo_plateforme): self
     {
         $this->dispo_plateforme = $dispo_plateforme;
-
-        return $this;
-    }
-
-    public function getQrCodeUrl(): ?string
-    {
-        return $this->qrcode_Url;
-    }
-
-    public function setQrCodeUrl(?string $qrcode_Url): self
-    {
-        $this->qrcode_Url = $qrcode_Url;
 
         return $this;
     }

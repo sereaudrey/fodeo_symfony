@@ -32,16 +32,16 @@
                         </div>
                     </div>
                     <div>
-                        <label for="titleAdd">Titre :</label>
+                        <label for="titleAdd">Titre *:</label>
                         <input type="text" id="add_titre_input" name="add_titre" value="" required>
                     </div>
                     <div>
-                        <label for="lienAffiche">Lien de l'affiche :</label>
+                        <label for="lienAffiche">Lien de l'affiche *:</label>
                         <input type="text" id="add_affiche_input" name="add_affiche" value="" required>
                     </div>
                     <div>
                         <label for="genre">Genre :</label>
-                        <select name="add_genre" id="add_genre_select" required>
+                        <select name="add_genre" id="add_genre_select">
                             <option value="Fantastique">Fantastique</option>
                             <option value="Action">Action</option>
                             <option value="Comédie">Comédie</option> 
@@ -49,6 +49,7 @@
                             <option value="Romance">Romance</option> 
                             <option value="Animé">Animé</option> 
                             <option value="Enfants">Enfants</option> 
+                            <option value="Drame">Drame</option> 
                         </select>
                     </div>
                     <div>
@@ -56,15 +57,15 @@
                         <input type="date" id="add_date_input" name="add_date" value="">
                     </div>
                     <div>
-                        <label for="synopsis">Synopsis :</label>
-                        <textarea type="text" id="add_synopsis_input" name="add_synopsis" value=""></textarea>
+                        <label for="synopsis">Synopsis *:</label>
+                        <textarea type="text" id="add_synopsis_input" name="add_synopsis" value="" required></textarea>
                     </div>
                     <div>
                         <label for="realisateurs">Réalisateurs :</label>
-                        <input type="text" id="add_realisateurs_input" name="add_realisateurs" value="" required>
+                        <input type="text" id="add_realisateurs_input" name="add_realisateurs" value="">
                     </div>
                     <div>
-                        <label for="acteurs">Acteurs :</label>
+                        <label for="acteurs">Acteurs *:</label>
                         <input type="text" id="add_acteurs_input" name="add_acteurs" value="" required>
                     </div>
                     <div class="note">
@@ -73,7 +74,7 @@
                     </div>
                     <div>
                         <label for="lienPlateforme">Plateforme :</label>
-                        <select id="add_lienPlat_select" name="add_plateforme" required>
+                        <select id="add_lienPlat_select" name="add_plateforme">
                             <option value="Netflix">Netflix</option>
                             <option value="Prime Vidéo">Prime Vidéo</option>
                             <option value="Disney+">Disney+</option> 

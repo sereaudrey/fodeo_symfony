@@ -212,6 +212,7 @@ class SecurityController extends AbstractController
        $role = 'Utilisateur';
        $dateCreation = new \DateTime('now');
 
+
        $manager->beginTransaction();
 
        try {
