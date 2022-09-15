@@ -44,30 +44,33 @@
             {% endif %}
         </div>
         <div class="infos-content">
-            <img class="img_affiche_film" src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
+            <div class="img_donnees">
+                <img class="img_affiche_film" src="{{ donneesFilm.affiche}}" alt="Affiche du film {{ donneesFilm.titre }}">
 
-            <div class="donneesFilm">
-                <div class="title-inline">
-                    <h2 class="titre_affiche">{{donneesFilm.titre}}</h2> 
-                    <a href="{{ path("pdf") ~ "?id=" ~ donneesFilm.id|number_format }}"><button class="btnPdf">Exporter en PDF</button></a><br>
-                </div><br>
-                <div class=" realisateur_affiche">Réalisateur(s) : {{ donneesFilm.realisateurs}}</div> <br>
-                <div class="acteur_affiche">Acteur(s) : {{ donneesFilm.acteurs }}</div> <br>
-                <div class="synopsis_affiche">Synopsis : {{ donneesFilm.synopsis}}</div> <br>
-                <div class="block_bottom">
-                    <div>
-                        <div class="donnees_affiche">Genre : {{ donneesFilm.genre}}</div> <br>
-                        <div class="donnees_affiche">Date de sortie : {{ donneesFilm.dateSortie|date('d/m/Y')}}</div> <br>
-                        <div class="donnees_affiche">Note : {{ donneesFilm.note}}/5</div> <br>
-                        <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div>
-                    </div>
-                    <div class="qrcode">
-                        <div class="qrCode_size">
-                            <p class="txt_qrcode">Visionnez la bande d'annonce :</p>
-                            <img src="{{ qr_code_url(qrCodeUrl) }}" alt="lien qrCode du film {{ donneesFilm.titre }}"/>
+                <div class="donneesFilm">
+                    <div class="title-inline">
+                        <h2 class="titre_affiche">{{donneesFilm.titre}}</h2> 
+                        <a href="{{ path("pdf") ~ "?id=" ~ donneesFilm.id|number_format }}"><button class="btnPdf">Exporter en PDF</button></a><br>
+                    </div><br>
+                    <div class=" realisateur_affiche">Réalisateur(s) : {{ donneesFilm.realisateurs}}</div> <br>
+                    <div class="acteur_affiche">Acteur(s) : {{ donneesFilm.acteurs }}</div> <br>
+                    <div class="synopsis_affiche">Synopsis : {{ donneesFilm.synopsis}}</div> <br>
+                    <div class="block_bottom">
+                        <div>
+                            <div class="donnees_affiche">Genre : {{ donneesFilm.genre}}</div> <br>
+                            <div class="donnees_affiche">Date de sortie : {{ donneesFilm.dateSortie|date('d/m/Y')}}</div> <br>
+                            <div class="donnees_affiche">Note : {{ donneesFilm.note}}/5</div> <br>
+                            <div class="donnees_affiche">Disponible sur : {{ donneesFilm.dispoPlateforme}}</div>
+                        </div>
+                        <div class="bande_annonce">
+                            <a href="{{donneesFilm.bandeAnnonce}}" class="lien_ba">Cliquez-ici pour visionner la bande annonce !</a>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="block_bandeAnnonce">
+                <h2> Bande annonce :</h2>
+                <iframe width="785" height="450" src="{{ afficheBA }}" title="Lecteur vidéo YouTube" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 

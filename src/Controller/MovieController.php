@@ -62,15 +62,25 @@ class MovieController extends AbstractController
     {
         // Récupérer l'id de l'URL
         $id = $request->get('id');
+        // Récupère les données du film via l'id
         $filmInfos = $moviesRepository->find($id);
-        
-
         $bande_annonce = $filmInfos->getBandeAnnonce();
+        //Pouvoir visionner la bande annonce 
+        $afficheBA = $bande_annonce;
+        $lien_a_enlever = "watch?v=";
+        $lien_a_remplacer = "embed/";
+        //On remplace les chaines de caractères dans le lien de la BA
+        $afficheBA = str_replace($lien_a_enlever, $lien_a_remplacer, $afficheBA);
+        //Transforme la chaine en tableau
+        $afficheBA = explode("&",$afficheBA);
+        $afficheBA = $afficheBA[0];
+
         return $this->render('affiche.html.twig', [
             'pageName' => 'details_affiche_film',
             'title' => 'Affiche du Film',
             'donneesFilm' => $filmInfos,
             'qrCodeUrl' => $bande_annonce,
+            'afficheBA' => $afficheBA,
 
         ]);
     }
@@ -117,6 +127,7 @@ class MovieController extends AbstractController
     public function createPdf(Request $request, MoviesRepository $moviesRepository) {
         $id = $request->get('id');
         $donneesFilm = $moviesRepository->find($id);
+        $bande_annonce = $donneesFilm->getBandeAnnonce();
         //on définit les options du pdf
         $optionsPdf = new Options();
         //Police par défaut
@@ -136,7 +147,8 @@ class MovieController extends AbstractController
         
         //On génère le html
         $html = $this->renderView('pdf.html.twig', [
-            'donneesFilm' => $donneesFilm
+            'donneesFilm' => $donneesFilm,
+            'qrCodeUrl' => $bande_annonce
         ]);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');

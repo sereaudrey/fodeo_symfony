@@ -44,6 +44,8 @@
 .infos-content {
     margin-top: 2%;
     text-align: justify;
+    display: flex;
+    flex-direction: column;
 }
 
 .img_affiche_film {
@@ -61,6 +63,7 @@
 
 .titre_affiche {
     font-size: 2em;
+    width: 79%;
 }
 
 .realisateur_affiche, .acteur_affiche {
@@ -72,7 +75,6 @@
 }
 
 .btnPdf {
-    float: right;
     margin-bottom: 2%;
 }
 
@@ -91,10 +93,14 @@
     justify-content: space-between;
 }
 
-.qrCode_size img{
-    width: 100px;
-    height: 100px;
-    margin-top: -6px;
+.bande_annonce {
+    display: none;
+    margin-top: 5%;
+}
+
+.bande_annonce a {
+    color: blue;
+    text-decoration: underline; 
 }
 
 /*Modifier film*/
@@ -116,8 +122,6 @@
 }
 /*RESPONSIVE*/
 @media only screen and (max-width: 1441px) {
-    /*Catalogue*/
-
     /*Affiche*/
     .img_affiche_film {
         width: 25%;
@@ -192,6 +196,15 @@
         margin-top: 2%;
     }
 
+    iframe {
+        width: 660px;
+        height: 350px;
+    }
+
+    .img_donnees {
+        margin-bottom: -70px;
+    }
+
 }
 
 @media only screen and (max-width: 426px) {
@@ -214,20 +227,19 @@
     }
 
     .btnPdf {
-        float: left;
-        margin: 0px 30% 5%;
-    }
-
-    .realisateur_affiche {
-        margin-top: 7%;
+        margin: 15px 30% 0;
     }
 
     .block_bottom {
         display: block;
     }
 
-    .qrCode_size img {
+    .lien_ba img {
         margin-left: 35%;
+    }
+
+    .bande_annonce {
+        display: block;
     }
 
     .buttonMovie {
@@ -236,6 +248,18 @@
 
     .main-content-affiche .home-title-button {
         display: block;
+    }
+
+    .qrcode {
+        display: none;
+    }
+    
+    .block_bandeAnnonce {
+        display: none;
+    }
+
+    .img_donnees {
+        margin-bottom: -70px;
     }
 
 }
@@ -280,7 +304,7 @@
     }
 
     .btnPdf {
-        margin: 5% 29%;
+        margin: 5% 29% 0;
     }
 
     .buttonMovie {
