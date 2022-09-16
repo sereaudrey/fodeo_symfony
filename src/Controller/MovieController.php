@@ -128,15 +128,6 @@ class MovieController extends AbstractController
         $id = $request->get('id');
         $donneesFilm = $moviesRepository->find($id);
         $bande_annonce = $donneesFilm->getBandeAnnonce();
-        //Pouvoir visionner la bande annonce 
-        $afficheBA = $bande_annonce;
-        $lien_a_enlever = "watch?v=";
-        $lien_a_remplacer = "embed/";
-        //On remplace les chaines de caractères dans le lien de la BA
-        $afficheBA = str_replace($lien_a_enlever, $lien_a_remplacer, $afficheBA);
-        //Transforme la chaine en tableau
-        $afficheBA = explode("&",$afficheBA);
-        $afficheBA = $afficheBA[0];
         //on définit les options du pdf
         $optionsPdf = new Options();
         //Police par défaut
@@ -157,7 +148,7 @@ class MovieController extends AbstractController
         //On génère le html
         $html = $this->renderView('pdf.html.twig', [
             'donneesFilm' => $donneesFilm,
-            'qrCodeUrl' => $afficheBA
+            'qrCodeUrl' => $bande_annonce
         ]);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
