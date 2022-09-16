@@ -46,7 +46,7 @@
                     <input type="password" id="password" name="mdp_newUser" value="" required />
                 </div>
 
-                <a href="{{ path('mdp-oublie') }}" class="lien-reset-mdp">Mot de passe oublié </a>
+                <a href="{{ path('login') }}" class="lien-reset-mdp">Se connecter </a>
 
                 {% for message in app.flashes('danger') %}
                     <div class="message-error" role="alert">

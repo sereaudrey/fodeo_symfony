@@ -57,7 +57,7 @@
 .donneesFilm {
     border-left: 1px solid black;
     padding-left: 20px;
-    margin-left: 32%;
+    margin-left: 25%;
     min-height: 585px;
 }
 
@@ -130,6 +130,7 @@
 
     .donneesFilm {
         min-height: 475px;
+        margin-left: 28%;
     }
 
     .titre_affiche {
@@ -160,13 +161,13 @@
     }
     /*Affiche*/
     .img_affiche_film {
-        width: 30%;
+        width: 35%;
         min-height: 460px;
     }
 
     .donneesFilm {
         min-height: 460px;
-        width: 70%;
+        margin-left: 38%;
     }
 
     .donneesFilm h2 {
@@ -240,6 +241,7 @@
 
     .bande_annonce {
         display: block;
+        margin-bottom: 10%;
     }
 
     .buttonMovie {
@@ -297,10 +299,6 @@
 
     .realisateur_affiche, .acteur_affiche {
         font-size: 1em;
-    }
-
-    .synopsis_affiche {
-        font-size: 0.8em;
     }
 
     .btnPdf {
