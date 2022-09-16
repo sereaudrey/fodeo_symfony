@@ -121,27 +121,96 @@
     margin-top: 5%;
 }
 /*RESPONSIVE*/
+@media only screen and (max-width: 2560px) {
+    /*Affiche*/
+    .img_affiche_film {
+        width: 35%;
+    }
+
+    .donneesFilm {
+        margin-left: 37%;
+        min-height: 1150px;
+        width: 60%;
+    }
+
+    .titre_affiche {
+        font-size: 4em;
+    }
+
+    .realisateur_affiche, .acteur_affiche {
+        font-size: 2.2em;
+    }
+
+    .synopsis_affiche {
+        font-size: 2em;
+    }
+
+    .block_bottom {
+        font-size: 1.8em;
+    }
+
+    .btnPdf {
+        font-size: 1.7em;
+        padding: 25px;
+    }
+
+    #affiche-content h1 {
+        font-size: 3em;
+    }
+
+    .block_bandeAnnonce h2 {
+        font-size: 3em;
+    }
+
+    iframe {
+        width: 60%;
+        height: 795px;
+    }
+}
 @media only screen and (max-width: 1441px) {
     /*Affiche*/
     .img_affiche_film {
-        width: 25%;
+        width: 35%;
         min-height: 475px;
     }
 
     .donneesFilm {
-        min-height: 475px;
+        min-height: 525px;
+        width: 60%;
     }
 
     .titre_affiche {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     .realisateur_affiche, .acteur_affiche {
-        font-size: 1.2em;
+        font-size: 1.5em;
     }
 
     .synopsis_affiche {
+        font-size: 1.6em;
+    }
+
+    .block_bottom {
+        font-size: 1.4em;
+    }
+
+    #affiche-content h1 {
+        font-size: 2em;
+    }
+
+    .btnPdf {
         font-size: 1em;
+        padding: 19px;
+    }
+
+    .block_bandeAnnonce h2 {
+        font-size: 2em;
+    }
+
+    iframe {
+        width: 70%;
+        height: 465px;
     }
 }
 
@@ -160,17 +229,40 @@
     }
     /*Affiche*/
     .img_affiche_film {
-        width: 30%;
+        width: 35%;
         min-height: 460px;
     }
 
     .donneesFilm {
         min-height: 460px;
-        width: 70%;
+        width: 60%;
+    }
+
+    .realisateur_affiche, .acteur_affiche {
+        font-size: 1.3em;
+    }
+
+    .synopsis_affiche {
+        font-size: 1.2em;
+    }
+
+    .block_bottom {
+        font-size: 1.1em;
     }
 
     .donneesFilm h2 {
         margin: 0;
+    }
+
+    .btnPdf {
+        padding: 12px;
+        font-size: unset;
+        width: 107%;
+    }
+
+    iframe {
+        width: 80%;
+        height: 450px;
     }
 }
 
@@ -190,6 +282,7 @@
         width: 100%;
         border: none;
         margin-left: 0;
+        padding-left: 0;
     }
 
     .title-inline {
@@ -205,6 +298,13 @@
         margin-bottom: -70px;
     }
 
+    .block_bandeAnnonce h2 {
+        font-size: 1.5em;
+    }
+    .block_bandeAnnonce {
+        margin-top: 10%;
+    }
+
 }
 
 @media only screen and (max-width: 426px) {
@@ -214,6 +314,10 @@
     }
 
     /*Affiche*/
+    .main-content {
+        width: 130%;
+    }
+
     .img_affiche_film {
         margin-top: 2%;
     }
@@ -227,11 +331,13 @@
     }
 
     .btnPdf {
-        margin: 15px 30% 0;
+        margin: 15px 28% 0;
+        width: 45%;
     }
 
     .block_bottom {
         display: block;
+        margin-bottom: 10%;
     }
 
     .lien_ba img {
@@ -279,6 +385,10 @@
     }
 
     /*Affiche*/
+    .main-content {
+        width: unset;
+    }
+
     h1 {
         font-size: 1.5em;
     }
@@ -299,12 +409,13 @@
         font-size: 1em;
     }
 
-    .synopsis_affiche {
+    .synopsis_affiche, .block_bottom {
         font-size: 0.8em;
     }
 
     .btnPdf {
-        margin: 5% 29% 0;
+        margin: 5% 25% 0;
+        width: 50%;
     }
 
     .buttonMovie {
@@ -334,10 +445,15 @@
     } 
 
     .btnPdf {
-        margin: 5% 24%;
+        margin: 5% 20%;
+        width: 60%;
     }
 
     .qrCode_size img {
         margin-left: 35%;
+    }
+
+    .block_bottom {
+        margin-bottom: unset;
     }
 }
